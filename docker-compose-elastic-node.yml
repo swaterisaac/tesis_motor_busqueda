@@ -24,8 +24,6 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-    networks:
-      - esnet
 
   carebro:
     container_name: cerebro-lab
@@ -34,8 +32,6 @@ services:
       - "9000:9000"
     external_links:
       - elasticsearch-lab-1:elasticsearch1
-    networks:
-      - esnet
 
   kibana:
     container_name: kibana-lab
