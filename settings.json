@@ -1,0 +1,108 @@
+{
+    "settings":
+    {
+        "number_of_shards": 2,
+        "number_of_replicas": 0,
+        "index":
+        {
+            "analysis":
+            {
+                "filter":
+                {
+                    "english_stop":
+                    {
+                        "type": "stop",
+                        "stopwords": "_english_"
+                    },
+                    "english_stemmer":
+                    {
+                        "type": "stemmer",
+                        "language": "english"
+                    },
+                    "english_synonyms":
+                    {
+                        "type": "synonym",
+                        "synonyms":
+                        [
+                            "shwarzenegger",
+                            "schwarzeneger",
+                            "chuache"
+                        ]
+                    }
+                },
+                "normalizer":
+                {
+                    "lowercase":
+                    {
+                        "type": "custom",
+                        "filter":
+                        [
+                            "lowercase"
+                        ]
+                    }
+                },
+                "analyzer":
+                {
+                    "lowercase":
+                    {
+                        "tokenizer": "keyword",
+                        "filter":
+                        [
+                            "lowercase"
+                        ]
+                    },
+                    "english":
+                    {
+                        "tokenizer": "standard",
+                        "filter":
+                        [
+                            "lowercase",
+                            "english_stop",
+                            "english_stemmer"
+                        ]
+                    },
+                    "english_with_synonyms":
+                    {
+                        "tokenizer": "standard",
+                        "filter":
+                        [
+                            "lowercase",
+                            "english_stop",
+                            "english_synonyms",
+                            "english_stemmer"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "mappings":{
+        "oferta":{
+            "dynamic": false,
+            "properties": {
+
+                "descriptor": {
+                    "type": "text",
+                    "analyzer": "english",
+                    "search_analyzer": "english"
+                },
+
+                "precio": {
+                    "type": "long"
+                },
+
+                "duracion":{
+                    "type": "long"
+                },
+
+                "consideraciones": {
+                    "type": "text"
+                },
+
+                "idEnDB":{
+                    "type": "long"
+                }
+            }
+        }
+    }
+}
