@@ -1,84 +1,141 @@
--- Creation of product table
-CREATE TABLE IF NOT EXISTS product (
-  product_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  PRIMARY KEY (product_id)
+
+CREATE TABLE IF NOT EXISTS regiones (
+  id INT NOT NULL,
+  nombre varchar(50) NOT NULL,
+  PRIMARY KEY (id)
 );
 
--- Creation of country table
-CREATE TABLE IF NOT EXISTS country (
-  country_id INT NOT NULL,
-  country_name varchar(450) NOT NULL,
-  PRIMARY KEY (country_id)
+CREATE TABLE IF NOT EXISTS consideraciones_medicas (
+  id INT NOT NULL,
+  nombre varchar(50) NOT NULL,
+  descripcion varchar(256),
+  PRIMARY KEY (id)
 );
 
--- Creation of city table
-CREATE TABLE IF NOT EXISTS city (
-  city_id INT NOT NULL,
-  city_name varchar(450) NOT NULL,
-  country_id INT NOT NULL,
-  PRIMARY KEY (city_id),
-  CONSTRAINT fk_country
-      FOREIGN KEY(country_id) 
-	  REFERENCES country(country_id)
+CREATE TABLE IF NOT EXISTS proveedores (
+  id INT NOT NULL,
+  nombre varchar(50) NOT NULL,
+  PRIMARY KEY (id)
 );
 
--- Creation of store table
-CREATE TABLE IF NOT EXISTS store (
-  store_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  city_id INT NOT NULL,
-  PRIMARY KEY (store_id),
-  CONSTRAINT fk_city
-      FOREIGN KEY(city_id) 
-	  REFERENCES city(city_id)
+CREATE TABLE IF NOT EXISTS comunas (
+  id INT NOT NULL,
+  nombre varchar(50) NOT NULL,
+  id_region INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_region 
+    FOREIGN KEY(id_region) 
+      REFERENCES regiones(id)
 );
 
--- Creation of user table
-CREATE TABLE IF NOT EXISTS users (
-  user_id INT NOT NULL,
-  name varchar(250) NOT NULL,
-  PRIMARY KEY (user_id)
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT NOT NULL,
+  nombre varchar(300) NOT NULL,
+  correo varchar(320) NOT NULL,
+  fecha_nacimiento date NOT NULL,
+  id_comuna INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_comuna
+    FOREIGN KEY(id_comuna)
+  REFERENCES comunas(id)
 );
 
--- Creation of status_name table
-CREATE TABLE IF NOT EXISTS status_name (
-  status_name_id INT NOT NULL,
-  status_name varchar(450) NOT NULL,
-  PRIMARY KEY (status_name_id)
+CREATE TABLE IF NOT EXISTS historial_busquedas (
+  id INT NOT NULL,
+  consulta text NOT NULL,
+  frecuencia integer NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_usuario
+    FOREIGN KEY(id_usuario) 
+  REFERENCES usuarios(id)
 );
 
--- Creation of sale table
-CREATE TABLE IF NOT EXISTS sale (
-  sale_id varchar(200) NOT NULL,
-  amount DECIMAL(20,3) NOT NULL,
-  date_sale TIMESTAMP,
-  product_id INT NOT NULL,
-  user_id INT NOT NULL,
-  store_id INT NOT NULL, 
-  PRIMARY KEY (sale_id),
-  CONSTRAINT fk_product
-      FOREIGN KEY(product_id) 
-	  REFERENCES product(product_id),
-  CONSTRAINT fk_user
-      FOREIGN KEY(user_id) 
-	  REFERENCES users(user_id),
-  CONSTRAINT fk_store
-      FOREIGN KEY(store_id) 
-	  REFERENCES store(store_id)	  
+CREATE TABLE IF NOT EXISTS ofertas_turisticas (
+  id INT NOT NULL,
+  nombre varchar(100) NOT NULL,
+  precio integer NOT NULL,
+  fecha_inicio date NOT NULL,
+  fecha_final date NOT NULL,
+  id_proveedor INT NOT NULL,
+  id_comuna INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_proveedor
+    FOREIGN KEY(id_proveedor) 
+      REFERENCES proveedores(id),
+  CONSTRAINT fk_comuna
+    FOREIGN KEY(id_comuna)
+      REFERENCES comunas(id)
 );
 
--- Creation of order_status table
-CREATE TABLE IF NOT EXISTS order_status (
-  order_status_id varchar(200) NOT NULL,
-  update_at TIMESTAMP,
-  sale_id varchar(200) NOT NULL,
-  status_name_id INT NOT NULL,
-  PRIMARY KEY (order_status_id),
-  CONSTRAINT fk_sale
-      FOREIGN KEY(sale_id) 
-	  REFERENCES sale(sale_id),
-  CONSTRAINT fk_status_name
-      FOREIGN KEY(status_name_id) 
-	  REFERENCES status_name(status_name_id)  
+
+-- Tablas intermedias
+
+CREATE TABLE IF NOT EXISTS historial_regiones (
+  id INT NOT NULL,
+  frecuencia integer NOT NULL,
+  id_region INT NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_region
+    FOREIGN KEY(id_region) 
+      REFERENCES regiones(id),
+  CONSTRAINT fk_usuario
+    FOREIGN KEY(id_usuario)
+      REFERENCES usuarios(id)
+);
+
+CREATE TABLE IF NOT EXISTS historial_comunas (
+  id INT NOT NULL,
+  frecuencia integer NOT NULL,
+  id_comuna INT NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_comuna
+    FOREIGN KEY(id_comuna) 
+      REFERENCES comunas(id),
+  CONSTRAINT fk_usuario
+    FOREIGN KEY(id_usuario)
+      REFERENCES usuarios(id)
+);
+
+CREATE TABLE IF NOT EXISTS usuario_consideraciones (
+  id INT NOT NULL,
+  id_consideracion INT NOT NULL,
+  id_usuario INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_consideracion
+    FOREIGN KEY(id_consideracion) 
+      REFERENCES consideraciones_medicas(id),
+  CONSTRAINT fk_usuario
+    FOREIGN KEY(id_usuario)
+      REFERENCES usuarios(id)
+);
+
+CREATE TABLE IF NOT EXISTS historial_ofertas (
+  id INT NOT NULL,
+  id_oferta INT NOT NULL,
+  id_usuario INT NOT NULL,
+  frecuencia integer NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_oferta
+    FOREIGN KEY(id_oferta) 
+      REFERENCES ofertas_turisticas(id),
+  CONSTRAINT fk_usuario
+    FOREIGN KEY(id_usuario)
+      REFERENCES usuarios(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS oferta_consideraciones (
+  id INT NOT NULL,
+  id_oferta INT NOT NULL,
+  id_consideracion INT NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_oferta
+    FOREIGN KEY(id_oferta) 
+      REFERENCES ofertas_turisticas(id),
+  CONSTRAINT fk_consideracion
+    FOREIGN KEY(id_consideracion)
+      REFERENCES consideraciones_medicas(id)
 );
