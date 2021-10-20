@@ -82,8 +82,21 @@
         "testlogstash":{
             "dynamic": false,
             "properties": {
-                "consideraciones": {
-                    "type": "text"
+                "descriptor": {
+                    "type": "text",
+                    "analyzer": "english",
+                    "search_analyzer": "english"
+                },
+
+                "precio": {
+                    "type": "long"
+                },
+
+                "fecha_inicio":{
+                    "type": "date"
+                },
+                "fecha_final":{
+                    "type": "date"
                 },
 
                 "idEnDB":{

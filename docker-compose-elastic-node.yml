@@ -4,6 +4,7 @@ services:
   elasticsearch-lab-1:
     container_name: elasticsearch-lab-1
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+
     environment:
       - "cluster.name=elasticsearch-lab-cluster"  #Sets cluster name
       - "node.name=elasticsearch-lab-node-1"      #Sets node name
