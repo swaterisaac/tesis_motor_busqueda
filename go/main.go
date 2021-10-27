@@ -3,30 +3,24 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
+	. "tesis/modelos"
+
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "admin"
-	dbname   = "postgres"
-)
-
-var db *sql.DB
-
-type Usuario struct {
-	ID              int
-	Nombre          string
-	Correo          string
-	FechaNacimiento string
-	IdColumna       int
+//Inicialización para cargar archivo .env (Variables de entorno)
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
 }
 
-//NO funciona la conexión del db
-func obtenerUsuarios() ([]Usuario, error) {
+//Obtener todos los usuarios de la base de datos
+func obtenerUsuarios(db *sql.DB) ([]Usuario, error) {
 	rows, err := db.Query("SELECT * FROM usuarios")
 	if err != nil {
 		return nil, err
@@ -49,9 +43,16 @@ func obtenerUsuarios() ([]Usuario, error) {
 }
 
 func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+	//Ambiente de conexión de base de datos
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
+		os.Getenv("PGDB_HOST"),
+		os.Getenv("PGDB_PORT"),
+		os.Getenv("PGDB_USER"),
+		os.Getenv("PGDB_PASSWORD"),
+		os.Getenv("PGDB_NAME"),
+	)
+	//--Conexión a la base de datos--//
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
@@ -63,26 +64,9 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("Conectado!")
-	//usuarios, err := obtenerUsuarios()
-	rows, err := db.Query("SELECT * FROM usuarios")
-	if err != nil {
-		panic(err)
-	}
-	defer rows.Close()
-	var usuarios []Usuario
+	///////////////////////////////////
 
-	for rows.Next() {
-		var usuario Usuario
-		if err := rows.Scan(&usuario.ID, &usuario.Nombre, &usuario.Correo,
-			&usuario.FechaNacimiento, &usuario.IdColumna); err != nil {
-			panic(err)
-		}
-		usuarios = append(usuarios, usuario)
-	}
-	if err = rows.Err(); err != nil {
-		fmt.Println(usuarios)
-		panic(err)
-	}
+	usuarios, err := obtenerUsuarios(db)
 
 	fmt.Println(usuarios)
 }

@@ -1,3 +1,4 @@
 #Carpetas de volúmenes
 /elasticsearch-lab
 /postgres_data
+go/.env
