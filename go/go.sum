@@ -1,3 +1,5 @@
+github.com/elastic/go-elasticsearch/v6 v6.8.2 h1:rp5DGrd63V5c6nHLjF6QEXUpZSvs0+QM3ld7m9VhV2g=
+github.com/elastic/go-elasticsearch/v6 v6.8.2/go.mod h1:UwaDJsD3rWLM5rKNFzv9hgox93HoX8utj1kxD9aFUcI=
 github.com/joho/godotenv v1.4.0 h1:3l4+N6zfMWnkbPEXKng2o2/MR5mSwTrBih4ZEkkz1lg=
 github.com/joho/godotenv v1.4.0/go.mod h1:f4LDr5Voq0i2e/R5DDNOoa2zzDfwtkZa6DnEwAbqwq4=
 github.com/lib/pq v1.10.3 h1:v9QZf2Sn6AmjXtQeFpdoq/eaNtYP6IN+7lcrygsIAtg=

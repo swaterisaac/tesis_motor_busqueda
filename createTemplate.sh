@@ -1,0 +1,1 @@
+curl -X PUT "localhost:9200/_template/testlogstash?pretty" -H 'Content-Type: application/json' -d @settingsTemplate.json

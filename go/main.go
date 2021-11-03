@@ -1,12 +1,16 @@
 package main
 
 import (
+	"bytes"
 	"database/sql"
+	"encoding/json"
 	"fmt"
+	"log"
 	"os"
-
 	busq "tesis/busquedas"
 	"tesis/modelos"
+
+	elasticsearch "github.com/elastic/go-elasticsearch/v6"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -43,6 +47,7 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) modelos.Comportamiento {
 	go busq.ObtenerUbicacionUsuario(db, idUsuario, canalContenidoRegion, canalContenidoComuna, canalErrorUbicacion)
 	go busq.ObtenerConsideracionesMedicasUsuario(db, idUsuario, canalContenidoConsideraciones, canalErrorConsideraciones)
 	//TODO: Mejor manejo de errores ya que con nil en un canal se queda esperando infinitamente
+	//Opción: Hacerlo con wait group para retorno de errores y resultados
 	/*
 		if err := <-canalErrorConsideraciones; err != nil {
 			panic(err)
@@ -106,9 +111,44 @@ func main() {
 	//valores, err := busq.ObtenerHistorialComunaUsuario(db, 3)
 	//valores, err := busq.ObtenerHistorialRegionUsuario(db, 7)
 	//valores, err := busq.ObtenerHistorialOfertasUsuario(db, 9)
-	valores := ObtenerComportamiento(db, 8)
-	if err != nil {
+
+	//valores := ObtenerComportamiento(db, 8)
+	//fmt.Printf("%+v\n", valores)
+
+	//elasticsearch
+	es, _ := elasticsearch.NewDefaultClient()
+	var buf bytes.Buffer
+	var r map[string]interface{}
+
+	query := map[string]interface{}{
+		"query": map[string]interface{}{
+			"match": map[string]interface{}{
+				"descriptor": "plaza",
+			},
+		},
+	}
+	if err := json.NewEncoder(&buf).Encode(query); err != nil {
 		panic(err)
 	}
-	fmt.Println(valores)
+	res, err := es.Search(
+		es.Search.WithIndex("testlogstash"),
+		es.Search.WithBody(&buf),
+		es.Search.WithPretty(),
+	)
+
+	if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
+		log.Fatalf("Error parsing the response body: %s", err)
+	}
+	// Print the response status, number of results, and request duration.
+
+	log.Printf(
+		"[%s] %d hits; took: %dms",
+		res.Status(),
+		int(r["hits"].(map[string]interface{})["total"].(float64)),
+		int(r["took"].(float64)),
+	)
+
+	for _, hit := range r["hits"].(map[string]interface{})["hits"].([]interface{}) {
+		log.Printf(" * ID=%s, %s", hit.(map[string]interface{})["_id"], hit.(map[string]interface{})["_source"])
+	}
 }
