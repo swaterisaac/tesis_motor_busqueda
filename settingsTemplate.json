@@ -101,6 +101,9 @@
 
                 "idEnDB":{
                     "type": "long"
+                },
+                "consideraciones":{
+                    "type": "keyword"
                 }
             }
         }
