@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	busq "tesis/busquedas"
-	"tesis/modelos"
+	"tesis/busquedas"
 	"tesis/query"
 
 	elasticsearch "github.com/elastic/go-elasticsearch/v6"
@@ -22,62 +21,6 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func ObtenerComportamiento(db *sql.DB, idUsuario int) modelos.Comportamiento {
-	canalErrorHistorialBusqueda := make(chan error)
-	canalErrorHistorialOferta := make(chan error)
-	canalErrorHistorialRegion := make(chan error)
-	canalErrorHistorialComuna := make(chan error)
-	canalErrorUbicacion := make(chan error)
-	canalErrorConsideraciones := make(chan error)
-
-	canalContenidoHistorialBusqueda := make(chan []modelos.Historial)
-	canalContenidoHistorialOferta := make(chan []modelos.Historial)
-	canalContenidoHistorialRegion := make(chan []modelos.Historial)
-	canalContenidoHistorialComuna := make(chan []modelos.Historial)
-	canalContenidoRegion := make(chan string)
-	canalContenidoComuna := make(chan string)
-	canalContenidoConsideraciones := make(chan []string)
-
-	go busq.ObtenerHistorialBusquedaUsuario(db, idUsuario, canalContenidoHistorialBusqueda, canalErrorHistorialBusqueda)
-	go busq.ObtenerHistorialOfertasUsuario(db, idUsuario, canalContenidoHistorialOferta, canalErrorHistorialOferta)
-	go busq.ObtenerHistorialRegionUsuario(db, idUsuario, canalContenidoHistorialRegion, canalErrorHistorialRegion)
-	go busq.ObtenerHistorialComunaUsuario(db, idUsuario, canalContenidoHistorialComuna, canalErrorHistorialComuna)
-	go busq.ObtenerUbicacionUsuario(db, idUsuario, canalContenidoRegion, canalContenidoComuna, canalErrorUbicacion)
-	go busq.ObtenerConsideracionesMedicasUsuario(db, idUsuario, canalContenidoConsideraciones, canalErrorConsideraciones)
-	//TODO: Mejor manejo de errores ya que con nil en un canal se queda esperando infinitamente
-	//Opción: Hacerlo con wait group para retorno de errores y resultados
-	/*
-		if err := <-canalErrorConsideraciones; err != nil {
-			panic(err)
-		}
-		if err := <-canalErrorHistorialBusqueda; err != nil {
-			panic(err)
-		}
-		if err := <-canalErrorHistorialComuna; err != nil {
-			panic(err)
-		}
-		if err := <-canalErrorHistorialOferta; err != nil {
-			panic(err)
-		}
-		if err := <-canalErrorHistorialRegion; err != nil {
-			panic(err)
-		}
-		if err := <-canalErrorUbicacion; err != nil {
-			panic(err)
-		}
-	*/
-	var comportamiento modelos.Comportamiento
-	comportamiento.Comuna = <-canalContenidoComuna
-	comportamiento.Region = <-canalContenidoRegion
-	comportamiento.HistorialBusqueda = <-canalContenidoHistorialBusqueda
-	comportamiento.HistorialOfertaTuristica = <-canalContenidoHistorialOferta
-	comportamiento.ComunaHistorial = <-canalContenidoHistorialComuna
-	comportamiento.RegionHistorial = <-canalContenidoHistorialRegion
-	comportamiento.ConsideracionesMedicas = <-canalContenidoConsideraciones
-
-	return comportamiento
 }
 
 func main() {
@@ -113,7 +56,10 @@ func main() {
 	var buf bytes.Buffer
 	var r map[string]interface{}
 
-	comportamiento := ObtenerComportamiento(db, 1)
+	comportamiento, err := busquedas.ObtenerComportamiento(db, 1)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Printf("%+v\n", comportamiento)
 
 	query := query.CrearQueryRecomendacion(comportamiento)
