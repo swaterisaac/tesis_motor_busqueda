@@ -1,0 +1,1 @@
+sudo cp logstash-docker/pipeline/test-1.conf /etc/logstash/conf.d
