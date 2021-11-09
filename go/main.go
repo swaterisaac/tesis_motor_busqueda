@@ -9,9 +9,9 @@ import (
 	"os"
 	busq "tesis/busquedas"
 	"tesis/modelos"
+	"tesis/query"
 
 	elasticsearch "github.com/elastic/go-elasticsearch/v6"
-
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -104,29 +104,19 @@ func main() {
 	fmt.Println("Conectado!")
 	///////////////////////////////////
 
-	//usuarios, err := busq.obtenerUsuarios(db)
-	//comuna, region, err := busq.ObtenerUbicacionUsuario(db, 40)
-	//valores, err := busq.ObtenerConsideracionesMedicasUsuario(db, 2)
-	//valores, err := busq.ObtenerHistorialBusquedaUsuario(db, 1)
-	//valores, err := busq.ObtenerHistorialComunaUsuario(db, 3)
-	//valores, err := busq.ObtenerHistorialRegionUsuario(db, 7)
-	//valores, err := busq.ObtenerHistorialOfertasUsuario(db, 9)
-
-	//valores := ObtenerComportamiento(db, 8)
 	//fmt.Printf("%+v\n", valores)
+	//castearComportamiento(valores)
 
 	//elasticsearch
+
 	es, _ := elasticsearch.NewDefaultClient()
 	var buf bytes.Buffer
 	var r map[string]interface{}
 
-	query := map[string]interface{}{
-		"query": map[string]interface{}{
-			"match": map[string]interface{}{
-				"descriptor": "plaza",
-			},
-		},
-	}
+	comportamiento := ObtenerComportamiento(db, 1)
+	fmt.Printf("%+v\n", comportamiento)
+
+	query := query.CrearQueryRecomendacion(comportamiento)
 	if err := json.NewEncoder(&buf).Encode(query); err != nil {
 		panic(err)
 	}
@@ -151,4 +141,5 @@ func main() {
 	for _, hit := range r["hits"].(map[string]interface{})["hits"].([]interface{}) {
 		log.Printf(" * ID=%s, %s", hit.(map[string]interface{})["_id"], hit.(map[string]interface{})["_source"])
 	}
+
 }
