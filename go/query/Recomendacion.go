@@ -2,6 +2,22 @@ package query
 
 import "tesis/modelos"
 
+//Puntajes de cada campo del comportamiento
+//Puntaje consideraciones medicas
+const puntajeConsideraciones float32 = 0.35
+
+//Puntaje de las ubicaciones del historial de las ofertas buscadas
+const puntajeUbicacionHistorial float32 = 0.02
+
+//Puntaje del historial de las ofertas turísticas
+const puntajeOfertasHistorial float32 = 0.08
+
+//Puntaje del historial de consultas hechas por el usuario
+const puntajeBusquedasHistorial float32 = 0.02
+
+//Puntaje NEGATIVO de la ubicacion del usuario
+const puntajeUbicacion float32 = 0.1
+
 func rescatarConsideraciones(comportamiento modelos.Comportamiento, puntaje float32) []map[string]interface{} {
 	var consideraciones []map[string]interface{}
 	for _, consideracion := range comportamiento.ConsideracionesMedicas {
@@ -67,17 +83,6 @@ func rescatarUbicacion(comportamiento modelos.Comportamiento, puntaje float32) m
 }
 
 func CrearQueryRecomendacion(comportamiento modelos.Comportamiento) map[string]interface{} {
-	//Puntajes de cada campo del comportamiento
-	//Puntaje consideraciones medicas
-	const puntajeConsideraciones float32 = 0.35
-	//Puntaje de las ubicaciones del historial de las ofertas buscadas
-	const puntajeUbicacionHistorial float32 = 0.02
-	//Puntaje del historial de las ofertas turísticas
-	const puntajeOfertasHistorial float32 = 0.08
-	//Puntaje del historial de consultas hechas por el usuario
-	const puntajeBusquedasHistorial float32 = 0.02
-	//Puntaje NEGATIVO de la ubicacion del usuario
-	const puntajeUbicacion float32 = 0.1
 
 	clausulaShould := []interface{}{}
 	consideraciones := rescatarConsideraciones(comportamiento, puntajeConsideraciones)

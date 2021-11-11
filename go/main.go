@@ -63,7 +63,7 @@ func main() {
 	}
 	fmt.Printf("%+v\n", comportamiento)
 
-	query := query.CrearQueryRecomendacion(comportamiento)
+	query := query.CrearQuery(comportamiento, "Traeme algo tony")
 	if err := json.NewEncoder(&buf).Encode(query); err != nil {
 		panic(err)
 	}
