@@ -6,6 +6,21 @@ import (
 	"tesis/modelos"
 )
 
+/*
+Entradas:
+db: *sql.DB sacado de la librería database/sql. Manejador de conexión a bases de datos mysql
+(pgsql en este caso)
+idUsuario: int que indica el id del usuario a sacar los datos.
+
+Salidas:
+modelos.Comportamiento: sacado de un struct en el paquete modelos que representa todo el comportamiento
+recopilado de un usuario en la base de datos.
+error: Error en caso de que algo salga mal
+
+Descripción:
+Función que usa todas las funciones con goroutines para recopilar el comportamiento de un usuario y
+lo retorna en forma de struct.
+*/
 func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, error) {
 	canalError := make(chan error)
 

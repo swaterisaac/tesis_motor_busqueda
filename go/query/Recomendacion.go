@@ -18,6 +18,17 @@ const puntajeBusquedasHistorial float32 = 0.02
 //Puntaje NEGATIVO de la ubicacion del usuario
 const puntajeUbicacion float32 = 0.1
 
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+puntaje: float32 el puntaje que se le asigna a esta micro-consulta
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Retorna la micro-consulta de las consideraciones médicas para luego sumarla al JSON general.
+*/
 func rescatarConsideraciones(comportamiento modelos.Comportamiento, puntaje float32) []map[string]interface{} {
 	var consideraciones []map[string]interface{}
 	for _, consideracion := range comportamiento.ConsideracionesMedicas {
@@ -34,6 +45,18 @@ func rescatarConsideraciones(comportamiento modelos.Comportamiento, puntaje floa
 
 	return consideraciones
 }
+
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+puntaje: float32 el puntaje que se le asigna a esta micro-consulta
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Retorna la micro-consulta del historial de ubicación para luego sumarla al JSON general.
+*/
 func rescatarUbicacionHistorial(comportamiento modelos.Comportamiento, puntaje float32) map[string]interface{} {
 	ubicacionHistorial := map[string]interface{}{
 		"match": map[string]interface{}{
@@ -46,6 +69,17 @@ func rescatarUbicacionHistorial(comportamiento modelos.Comportamiento, puntaje f
 	return ubicacionHistorial
 }
 
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+puntaje: float32 el puntaje que se le asigna a esta micro-consulta
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Retorna la micro-consulta del historial de ofertas turísticas para luego sumarla al JSON general.
+*/
 func rescatarOfertasHistorial(comportamiento modelos.Comportamiento, puntaje float32) map[string]interface{} {
 	ofertasHistorial := map[string]interface{}{
 		"match": map[string]interface{}{
@@ -58,6 +92,17 @@ func rescatarOfertasHistorial(comportamiento modelos.Comportamiento, puntaje flo
 	return ofertasHistorial
 }
 
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+puntaje: float32 el puntaje que se le asigna a esta micro-consulta
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Retorna la micro-consulta del historial de queries para luego sumarla al JSON general.
+*/
 func rescatarBusquedaHistorial(comportamiento modelos.Comportamiento, puntaje float32) map[string]interface{} {
 	busquedaHistorial := map[string]interface{}{
 		"match": map[string]interface{}{
@@ -70,6 +115,17 @@ func rescatarBusquedaHistorial(comportamiento modelos.Comportamiento, puntaje fl
 	return busquedaHistorial
 }
 
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+puntaje: float32 el puntaje que se le asigna a esta micro-consulta
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Retorna la micro-consulta de la ubicación del usuario para luego sumarla al JSON general.
+*/
 func rescatarUbicacion(comportamiento modelos.Comportamiento, puntaje float32) map[string]interface{} {
 	ubicacion := map[string]interface{}{
 		"match": map[string]interface{}{
@@ -82,6 +138,16 @@ func rescatarUbicacion(comportamiento modelos.Comportamiento, puntaje float32) m
 	return ubicacion
 }
 
+/*
+Entradas:
+comportamiento: modelos.Comportamiento El comportamiento de un usuario
+
+Salidas:
+[]map[string]interface{}: Casteo de JSON para la consulta en elasticsearch
+
+Descripción:
+Suma toda las micro-consultas para crear el JSON de búsqueda a elasticsearch
+*/
 func CrearQueryRecomendacion(comportamiento modelos.Comportamiento) map[string]interface{} {
 
 	clausulaShould := []interface{}{}
