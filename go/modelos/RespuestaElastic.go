@@ -22,3 +22,9 @@ type RespuestaElastic struct {
 	Consideraciones []string
 	Descriptor      string
 }
+
+type RespuestaStatus struct {
+	Code string
+	Hits int
+	Took int
+}
