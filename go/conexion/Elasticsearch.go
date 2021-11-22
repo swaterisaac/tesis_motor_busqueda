@@ -8,11 +8,11 @@ import (
 	"github.com/elastic/go-elasticsearch/v6/esapi"
 )
 
-func BuscarRecomendacion(es *elasticsearch.Client, query map[string]interface{}) (*esapi.Response, error) {
+func BuscarRecomendacion(es *elasticsearch.Client, query map[string]interface{}) (*esapi.Response, map[string]interface{}, error) {
 	var buf bytes.Buffer
 	var r map[string]interface{}
 	if err := json.NewEncoder(&buf).Encode(query); err != nil {
-		panic(err)
+		return nil, r, err
 	}
 	res, err := es.Search(
 		es.Search.WithIndex("testlogstash"),
@@ -20,10 +20,10 @@ func BuscarRecomendacion(es *elasticsearch.Client, query map[string]interface{})
 		es.Search.WithPretty(),
 	)
 	if err != nil {
-		return nil, err
+		return nil, r, err
 	}
 	if err := json.NewDecoder(res.Body).Decode(&r); err != nil {
-		return nil, err
+		return nil, r, err
 	}
-	return res, err
+	return res, r, err
 }

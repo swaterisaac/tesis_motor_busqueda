@@ -32,9 +32,8 @@ func main() {
 	fmt.Printf("%+v\n", comportamiento)
 	query := query.CrearQueryRecomendacion(comportamiento)
 
-	res, err := conexion.BuscarRecomendacion(es, query)
+	res, r, err := conexion.BuscarRecomendacion(es, query)
 	// Print the response status, number of results, and request duration.
-
 	log.Printf(
 		"[%s] %d hits; took: %dms",
 		res.Status(),
