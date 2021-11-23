@@ -1,3 +1,9 @@
+CREATE TABLE IF NOT EXISTS scrappings (
+  id INT NOT NULL,
+  nombreDb varchar(50) NOT NULL,
+  ultimaTupla integer DEFAULT 0,
+  PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS regiones (
   id INT NOT NULL,

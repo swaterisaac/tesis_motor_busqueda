@@ -11,8 +11,7 @@ import (
 )
 
 func main() {
-
-	db, err := conexion.ConexionDb()
+	db, err := conexion.ConexionDb(conexion.ObtenerEntornoConexion())
 	if err != nil {
 		panic(err)
 	}
@@ -20,7 +19,11 @@ func main() {
 
 	//elasticsearch
 
-	es, _ := elasticsearch.NewDefaultClient()
+	es, err := elasticsearch.NewDefaultClient()
+	if err != nil {
+		panic(err)
+	}
+
 	var r map[string]interface{}
 	idUsuario := 1
 	comportamiento, err := busquedas.ObtenerComportamiento(db, idUsuario)

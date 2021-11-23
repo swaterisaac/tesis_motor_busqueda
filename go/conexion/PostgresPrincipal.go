@@ -16,9 +16,8 @@ func init() {
 	}
 }
 
-func ConexionDb() (*sql.DB, error) {
-	//Ambiente de conexión de base de datos
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s "+
+func ObtenerEntornoConexion() string {
+	return fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		os.Getenv("PGDB_HOST"),
 		os.Getenv("PGDB_PORT"),
@@ -26,6 +25,9 @@ func ConexionDb() (*sql.DB, error) {
 		os.Getenv("PGDB_PASSWORD"),
 		os.Getenv("PGDB_NAME"),
 	)
+}
+
+func ConexionDb(psqlInfo string) (*sql.DB, error) {
 	//--Conexión a la base de datos--//
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {

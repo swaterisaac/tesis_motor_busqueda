@@ -1,0 +1,2 @@
+insert into ofertas (id, nombre,fecha_inicio, fecha_final, precio, comuna, proveedor) values (1, 'Super oferta', '2020-06-23', '2020-08-23', 13490,'Lo Prado', 'Sernatur');
+insert into ofertas (id, nombre,fecha_inicio, fecha_final, precio, comuna, proveedor) values (2, 'Mega oferta', '2020-07-28', '2020-09-29', 20000, 'La Florida', 'ProveedorCualquiera');
