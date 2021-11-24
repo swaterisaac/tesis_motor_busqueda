@@ -1,12 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"tesis/busquedas"
 	"tesis/conexion"
-	"tesis/query"
 
-	elasticsearch "github.com/elastic/go-elasticsearch/v6"
 	_ "github.com/lib/pq"
 )
 
@@ -17,25 +13,32 @@ func main() {
 	}
 	defer db.Close()
 
+	dbScrappingPrueba, err := conexion.ConexionDb(conexion.ObtenerConexionScrappingPrueba())
+	if err != nil {
+		panic(err)
+	}
+	defer dbScrappingPrueba.Close()
+
+	conexion.ListenerGeneral(db, dbScrappingPrueba, conexion.QueryScrappingPrueba, conexion.TraductorScrappingGeneral, "prueba")
 	//elasticsearch
+	/*
+		es, err := elasticsearch.NewDefaultClient()
+		if err != nil {
+			panic(err)
+		}
 
-	es, err := elasticsearch.NewDefaultClient()
-	if err != nil {
-		panic(err)
-	}
-
-	var r map[string]interface{}
-	idUsuario := 1
-	comportamiento, err := busquedas.ObtenerComportamiento(db, idUsuario)
-	if err != nil {
-		panic(err)
-	}
-	query := query.CrearQueryRecomendacion(comportamiento)
-	res, r, err := conexion.BuscarRecomendacion(es, query)
-	status := conexion.ObtenerRespuestaStatus(res, r)
-	respuestas := conexion.CastearRespuesta(r)
-	fmt.Printf("%+v\n", comportamiento)
-	fmt.Printf("%+v\n", status)
-	fmt.Printf("%+v\n", respuestas)
-
+		var r map[string]interface{}
+		idUsuario := 1
+		comportamiento, err := busquedas.ObtenerComportamiento(db, idUsuario)
+		if err != nil {
+			panic(err)
+		}
+		query := query.CrearQueryRecomendacion(comportamiento)
+		res, r, err := conexion.BuscarRecomendacion(es, query)
+		status := conexion.ObtenerRespuestaStatus(res, r)
+		respuestas := conexion.CastearRespuesta(r)
+		fmt.Printf("%+v\n", comportamiento)
+		fmt.Printf("%+v\n", status)
+		fmt.Printf("%+v\n", respuestas)
+	*/
 }
