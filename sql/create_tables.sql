@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS ofertas_turisticas (
 -- Tablas intermedias
 
 CREATE TABLE IF NOT EXISTS historial_regiones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   frecuencia integer NOT NULL,
   id_region INT NOT NULL,
   id_usuario INT NOT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS historial_regiones (
 );
 
 CREATE TABLE IF NOT EXISTS historial_comunas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   frecuencia integer NOT NULL,
   id_comuna INT NOT NULL,
   id_usuario INT NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS historial_comunas (
 );
 
 CREATE TABLE IF NOT EXISTS usuario_consideraciones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_consideracion INT NOT NULL,
   id_usuario INT NOT NULL,
   PRIMARY KEY (id),
@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS usuario_consideraciones (
 );
 
 CREATE TABLE IF NOT EXISTS historial_ofertas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_oferta INT NOT NULL,
   id_usuario INT NOT NULL,
   frecuencia integer NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS historial_ofertas (
 
 
 CREATE TABLE IF NOT EXISTS oferta_consideraciones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_oferta INT NOT NULL,
   id_consideracion INT NOT NULL,
   PRIMARY KEY (id),

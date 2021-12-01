@@ -228,7 +228,7 @@ insert into historial_regiones (frecuencia, id_usuario, id_region) values (46, 1
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (92, 25, 10);
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (84, 24, 10);
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (85, 9, 3);
-insert into historial_regiones (frecuencia, id_usuario, id_region) values (28, 8);
+insert into historial_regiones (frecuencia, id_usuario, id_region) values (28, 9, 8);
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (69, 5, 7);
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (5, 14, 7);
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (70, 1, 2);
@@ -555,7 +555,7 @@ insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (602, 5
 insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (41, 16, 2);
 insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (982, 2, 26);
 insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (770, 1, 7);
-insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values ( 234, 14, 10);
+insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (234, 14, 10);
 
 --Oferta consideración
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (15, 3);
