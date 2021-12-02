@@ -32,19 +32,32 @@ func ObtenerOfertaPorId(db *sql.DB, id int) (modelos.OfertaTuristica, error, int
 	return oferta, nil, 200
 }
 
-func ObtenerRecomendacionOfertas(db *sql.DB, es *elasticsearch.Client, idUsuario int) ([]modelos.OfertaTuristica, error) {
-
+//Obtención de querys a elasticsearch
+func queryRecomendacion(db *sql.DB, idUsuario int) (map[string]interface{}, error) {
 	comportamiento, err := ObtenerComportamiento(db, idUsuario)
 	if err != nil {
 		return nil, err
 	}
 	queryElasticsearch := query.CrearQueryRecomendacion(comportamiento)
+	return queryElasticsearch, nil
+}
+
+func queryNormal(db *sql.DB, idUsuario int, queryUsuario string) (map[string]interface{}, error) {
+	comportamiento, err := ObtenerComportamiento(db, idUsuario)
+	if err != nil {
+		return nil, err
+	}
+	queryElasticsearch := query.CrearQuery(comportamiento, queryUsuario)
+	return queryElasticsearch, nil
+}
+
+//Obtención de ofertas
+func obtenerOfertasGeneral(db *sql.DB, es *elasticsearch.Client, idUsuario int, queryElasticsearch map[string]interface{}) ([]modelos.OfertaTuristica, error) {
 
 	res, r, err := conexion.BuscarRecomendacion(es, queryElasticsearch)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("%+v\n\n%+v", res, r)
 	conexion.ObtenerRespuestaStatus(res, r)
 	respuestas := conexion.CastearRespuesta(r)
 
@@ -52,12 +65,28 @@ func ObtenerRecomendacionOfertas(db *sql.DB, es *elasticsearch.Client, idUsuario
 
 	for _, respuesta := range respuestas {
 		oferta, err, _ := ObtenerOfertaPorId(db, int(respuesta.IdEnDb))
-		fmt.Printf("Oferta: %+v\n\n", oferta)
 		if err != nil {
 			return ofertas, err
 		}
 		ofertas = append(ofertas, oferta)
-		fmt.Printf("Ofertas: %+v\n\n", ofertas)
 	}
 	return ofertas, nil
+}
+
+func ObtenerOfertasRecomendacion(db *sql.DB, es *elasticsearch.Client, idUsuario int) ([]modelos.OfertaTuristica, error) {
+	queryElasticsearch, err := queryRecomendacion(db, idUsuario)
+	if err != nil {
+		return nil, err
+	}
+	ofertas, err := obtenerOfertasGeneral(db, es, idUsuario, queryElasticsearch)
+	return ofertas, err
+}
+
+func ObtenerOfertasQuery(db *sql.DB, es *elasticsearch.Client, idUsuario int, queryUsuario string) ([]modelos.OfertaTuristica, error) {
+	queryElasticsearch, err := queryNormal(db, idUsuario, queryUsuario)
+	if err != nil {
+		return nil, err
+	}
+	ofertas, err := obtenerOfertasGeneral(db, es, idUsuario, queryElasticsearch)
+	return ofertas, err
 }

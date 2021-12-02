@@ -421,7 +421,7 @@ insert into historial_comunas (frecuencia, id_usuario, id_comuna) values (5, 7, 
 insert into historial_comunas (frecuencia, id_usuario, id_comuna) values (37, 29, 5);
 insert into historial_comunas (frecuencia, id_usuario, id_comuna) values (38, 10, 8);
 insert into historial_comunas (frecuencia, id_usuario, id_comuna) values (38, 22, 3);
-insert into historial_comunas (frecuencia, id_usuario, id_comuna) values ( 74, 23, 1);
+insert into historial_comunas (frecuencia, id_usuario, id_comuna) values (74, 23, 1);
 
 --Usuario consideración
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (1, 2);

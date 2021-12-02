@@ -1,12 +1,12 @@
 package modelos
 
 type OfertaTuristica struct {
-	ID          int
-	Nombre      string
-	FechaInicio string
-	FechaFinal  string
-	Precio      int
-	Comuna      string
-	Region      string
-	Proveedor   string
+	ID          int    `json:"id"`
+	Nombre      string `json:"nombre"`
+	FechaInicio string `json:"fecha_inicio"`
+	FechaFinal  string `json:"fecha_final"`
+	Precio      int    `json:"precio"`
+	Comuna      string `json:"comuna"`
+	Region      string `json:"region"`
+	Proveedor   string `json:"proveedor"`
 }
