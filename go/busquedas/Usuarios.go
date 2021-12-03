@@ -114,3 +114,17 @@ func ObtenerConsideracionesMedicasUsuario(db *sql.DB, idUsuario int) ([]string, 
 
 	return consideraciones, nil
 }
+
+func ObtenerIdUsarioPorCorreo(db *sql.DB, correo string) (int, error, int) {
+	query := fmt.Sprintf("SELECT id FROM usuarios u WHERE u.correo = '%s'", correo)
+	var id int
+	err := db.QueryRow(query).Scan(&id)
+
+	if err == sql.ErrNoRows {
+		return 0, err, 404
+	}
+	if err != nil {
+		return 0, err, 500
+	}
+	return id, nil, 200
+}

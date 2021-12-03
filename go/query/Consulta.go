@@ -39,7 +39,8 @@ Descripción:
 Recopila todas las consideraciones más la query correspondiente y la devuelve como JSON para
 elasticsearch
 */
-func CrearQuery(comportamiento modelos.Comportamiento, queryEntrada string) map[string]interface{} {
+func CrearQuery(comportamiento modelos.Comportamiento, queryEntrada string, tamanio int, pagina int) map[string]interface{} {
+	desde := tamanio * (pagina - 1)
 
 	const reduccion float32 = 0.4
 	puntajeBusquedasHistorialQ := puntajeBusquedasHistorial * reduccion
@@ -58,6 +59,8 @@ func CrearQuery(comportamiento modelos.Comportamiento, queryEntrada string) map[
 	clausulaShould = append(clausulaShould, rescatarBusquedaHistorial(comportamiento, puntajeBusquedasHistorialQ))
 	clausulaShould = append(clausulaShould, rescatarQuery(queryEntrada))
 	query := map[string]interface{}{
+		"size": tamanio,
+		"from": desde,
 		"query": map[string]interface{}{
 			"bool": map[string]interface{}{
 				"should": clausulaShould,

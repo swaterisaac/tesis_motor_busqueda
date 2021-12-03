@@ -1,8 +1,8 @@
 package main
 
 import (
-	"tesis/busquedas"
 	"tesis/conexion"
+	"tesis/enrutador"
 
 	elasticsearch "github.com/elastic/go-elasticsearch/v6"
 	cors "github.com/gin-contrib/cors"
@@ -49,14 +49,7 @@ func main() {
 		},
 	}))
 	router.GET("/ofertas", func(c *gin.Context) {
-		ofertas, err := busquedas.ObtenerOfertasRecomendacion(db, es, 12)
-		if err != nil {
-			c.JSON(500, gin.H{
-				"error": err,
-			})
-		}
-
-		c.JSON(200, ofertas)
+		enrutador.ObtenerOfertasUsuario(c, db, es)
 	})
 	router.Run(":3632")
 }

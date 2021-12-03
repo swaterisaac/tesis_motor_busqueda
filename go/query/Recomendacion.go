@@ -148,8 +148,8 @@ Salidas:
 Descripción:
 Suma toda las micro-consultas para crear el JSON de búsqueda a elasticsearch
 */
-func CrearQueryRecomendacion(comportamiento modelos.Comportamiento) map[string]interface{} {
-
+func CrearQueryRecomendacion(comportamiento modelos.Comportamiento, tamanio int, pagina int) map[string]interface{} {
+	desde := tamanio * (pagina - 1)
 	clausulaShould := []interface{}{}
 	consideraciones := rescatarConsideraciones(comportamiento, puntajeConsideraciones)
 	for _, consideracion := range consideraciones {
@@ -159,6 +159,8 @@ func CrearQueryRecomendacion(comportamiento modelos.Comportamiento) map[string]i
 	clausulaShould = append(clausulaShould, rescatarOfertasHistorial(comportamiento, puntajeOfertasHistorial))
 	clausulaShould = append(clausulaShould, rescatarBusquedaHistorial(comportamiento, puntajeBusquedasHistorial))
 	query := map[string]interface{}{
+		"size": tamanio,
+		"from": desde,
 		"query": map[string]interface{}{
 			"bool": map[string]interface{}{
 				"should": clausulaShould,
