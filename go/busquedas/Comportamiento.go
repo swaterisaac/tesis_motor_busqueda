@@ -34,60 +34,63 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, e
 
 	var wg sync.WaitGroup
 	wg.Add(6)
+	go func() {
+		wg.Wait()
+		close(canalError)
+	}()
 
 	go func() {
-		defer wg.Done()
 		historialBusqueda, err := ObtenerHistorialBusquedaUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
+
 		}
+		wg.Done()
 		canalContenidoHistorialBusqueda <- historialBusqueda
 	}()
 	go func() {
-		defer wg.Done()
 		historialOfertas, err := ObtenerHistorialOfertasUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
 		}
+		wg.Done()
 		canalContenidoHistorialOferta <- historialOfertas
 	}()
 	go func() {
-		defer wg.Done()
 		historialRegion, err := ObtenerHistorialRegionUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
 		}
+		wg.Done()
 		canalContenidoHistorialRegion <- historialRegion
 	}()
 	go func() {
-		defer wg.Done()
 		historialComuna, err := ObtenerHistorialComunaUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
 		}
+		wg.Done()
 		canalContenidoHistorialComuna <- historialComuna
 	}()
 	go func() {
-		defer wg.Done()
 		comuna, region, err := ObtenerUbicacionUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
 		}
+		wg.Done()
 		canalContenidoComuna <- comuna
 		canalContenidoRegion <- region
 	}()
 	go func() {
-		defer wg.Done()
+
 		consideraciones, err := ObtenerConsideracionesMedicasUsuario(db, idUsuario)
 		if err != nil {
 			canalError <- err
 		}
+		wg.Done()
 		canalContenidoConsideraciones <- consideraciones
 	}()
-
-	//wg.Wait()
 	var comportamiento modelos.Comportamiento
-	close(canalError)
 	//Manejo de errores
 	for err := range canalError {
 		if err != nil {
@@ -102,6 +105,7 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, e
 	comportamiento.ComunaHistorial = <-canalContenidoHistorialComuna
 	comportamiento.RegionHistorial = <-canalContenidoHistorialRegion
 	comportamiento.ConsideracionesMedicas = <-canalContenidoConsideraciones
+
 	return comportamiento, nil
 
 }

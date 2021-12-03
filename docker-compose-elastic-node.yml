@@ -59,3 +59,19 @@ services:
       - POSTGRES_PASSWORD=admin
     ports:
       - '5432:5432'
+
+  postgres-scrapping:
+      image: postgres:10.5
+      container_name: postgres-scrapping
+      restart: always
+      volumes:
+        - ./postgres_data_scrapping:/var/lib/postgresql/data
+        # copy the sql script to create tables
+        - ./sql/scrapping_create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+        # copy the sql script to fill tables
+        - ./sql/scrapping_fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=admin
+      ports:
+        - '5433:5432'

@@ -1,25 +1,31 @@
+CREATE TABLE IF NOT EXISTS scrapings (
+  id SERIAL NOT NULL,
+  nombreDb varchar(50) NOT NULL,
+  ultimaTupla integer DEFAULT 0,
+  PRIMARY KEY (id)
+);
 
 CREATE TABLE IF NOT EXISTS regiones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(50) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS consideraciones_medicas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(50) NOT NULL,
   descripcion varchar(256),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS proveedores (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(50) NOT NULL,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS comunas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(50) NOT NULL,
   id_region INT NOT NULL,
   PRIMARY KEY (id),
@@ -29,7 +35,7 @@ CREATE TABLE IF NOT EXISTS comunas (
 );
 
 CREATE TABLE IF NOT EXISTS usuarios (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(300) NOT NULL,
   correo varchar(320) NOT NULL,
   fecha_nacimiento date NOT NULL,
@@ -41,7 +47,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 );
 
 CREATE TABLE IF NOT EXISTS historial_busquedas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   consulta text NOT NULL,
   frecuencia integer NOT NULL,
   id_usuario INT NOT NULL,
@@ -52,7 +58,7 @@ CREATE TABLE IF NOT EXISTS historial_busquedas (
 );
 
 CREATE TABLE IF NOT EXISTS ofertas_turisticas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   nombre varchar(100) NOT NULL,
   precio integer NOT NULL,
   fecha_inicio date NOT NULL,
@@ -72,7 +78,7 @@ CREATE TABLE IF NOT EXISTS ofertas_turisticas (
 -- Tablas intermedias
 
 CREATE TABLE IF NOT EXISTS historial_regiones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   frecuencia integer NOT NULL,
   id_region INT NOT NULL,
   id_usuario INT NOT NULL,
@@ -86,7 +92,7 @@ CREATE TABLE IF NOT EXISTS historial_regiones (
 );
 
 CREATE TABLE IF NOT EXISTS historial_comunas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   frecuencia integer NOT NULL,
   id_comuna INT NOT NULL,
   id_usuario INT NOT NULL,
@@ -100,7 +106,7 @@ CREATE TABLE IF NOT EXISTS historial_comunas (
 );
 
 CREATE TABLE IF NOT EXISTS usuario_consideraciones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_consideracion INT NOT NULL,
   id_usuario INT NOT NULL,
   PRIMARY KEY (id),
@@ -113,7 +119,7 @@ CREATE TABLE IF NOT EXISTS usuario_consideraciones (
 );
 
 CREATE TABLE IF NOT EXISTS historial_ofertas (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_oferta INT NOT NULL,
   id_usuario INT NOT NULL,
   frecuencia integer NOT NULL,
@@ -128,7 +134,7 @@ CREATE TABLE IF NOT EXISTS historial_ofertas (
 
 
 CREATE TABLE IF NOT EXISTS oferta_consideraciones (
-  id INT NOT NULL,
+  id SERIAL NOT NULL,
   id_oferta INT NOT NULL,
   id_consideracion INT NOT NULL,
   PRIMARY KEY (id),
