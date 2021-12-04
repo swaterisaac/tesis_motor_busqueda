@@ -51,5 +51,8 @@ func main() {
 	router.GET("/ofertas", func(c *gin.Context) {
 		enrutador.ObtenerOfertasUsuario(c, db, es)
 	})
+	router.GET("/ofertasQuery", func(c *gin.Context) {
+		enrutador.ObtenerOfertasQuery(c, db, es)
+	})
 	router.Run(":3632")
 }
