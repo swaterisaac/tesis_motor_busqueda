@@ -16,7 +16,7 @@ const puntajeOfertasHistorial float32 = 0.08
 const puntajeBusquedasHistorial float32 = 0.02
 
 //Puntaje NEGATIVO de la ubicacion del usuario
-const puntajeUbicacion float32 = 0.1
+//const puntajeUbicacion float32 = 0.1
 
 /*
 Entradas:
@@ -164,10 +164,6 @@ func CrearQueryRecomendacion(comportamiento modelos.Comportamiento, tamanio int,
 		"query": map[string]interface{}{
 			"bool": map[string]interface{}{
 				"should": clausulaShould,
-
-				"must_not": []interface{}{
-					rescatarUbicacion(comportamiento, puntajeUbicacion),
-				},
 			},
 		},
 	}

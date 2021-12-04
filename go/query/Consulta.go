@@ -46,7 +46,6 @@ func CrearQuery(comportamiento modelos.Comportamiento, queryEntrada string, tama
 	puntajeBusquedasHistorialQ := puntajeBusquedasHistorial * reduccion
 	puntajeConsideracionesQ := puntajeConsideraciones * reduccion
 	puntajeOfertasHistorialQ := puntajeOfertasHistorial * reduccion
-	puntajeUbicacionQ := puntajeUbicacion * reduccion
 	puntajeUbicacionHistorialQ := puntajeUbicacionHistorial * reduccion
 
 	clausulaShould := []interface{}{}
@@ -64,10 +63,6 @@ func CrearQuery(comportamiento modelos.Comportamiento, queryEntrada string, tama
 		"query": map[string]interface{}{
 			"bool": map[string]interface{}{
 				"should": clausulaShould,
-
-				"must_not": []interface{}{
-					rescatarUbicacion(comportamiento, puntajeUbicacionQ),
-				},
 			},
 		},
 	}
