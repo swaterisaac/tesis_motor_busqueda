@@ -128,3 +128,35 @@ func ObtenerIdUsarioPorCorreo(db *sql.DB, correo string) (int, error, int) {
 	}
 	return id, nil, 200
 }
+
+func ObtenerUsuarioPorCorreo(db *sql.DB, correo string) (modelos.UsuarioApp, error, int) {
+	query := fmt.Sprintf("SELECT u.id, u.nombre, u.correo, u.fecha_nacimiento, c.nombre, r.nombre "+
+		"FROM usuarios u, comunas c, regiones r "+
+		"WHERE u.correo = '%s' AND u.id_comuna = c.id AND c.id_region = r.id", correo)
+	var usuario modelos.UsuarioApp
+	err := db.QueryRow(query).Scan(&usuario.ID, &usuario.Nombre, &usuario.Correo, &usuario.FechaNacimiento, &usuario.Comuna, &usuario.Region)
+
+	if err == sql.ErrNoRows {
+		return usuario, err, 404
+	}
+	if err != nil {
+		return usuario, err, 500
+	}
+	queryConsideraciones := fmt.Sprintf("SELECT cm.nombre "+
+		"FROM usuarios u, consideraciones_medicas cm, usuario_consideraciones uc "+
+		"WHERE u.id = %d AND u.id = uc.id_usuario AND cm.id = uc.id_consideracion", usuario.ID)
+
+	rows, err := db.Query(queryConsideraciones)
+	defer rows.Close()
+	if err == sql.ErrNoRows {
+		return usuario, nil, 200
+	}
+	for rows.Next() {
+		var consideracion string
+		if err := rows.Scan(&consideracion); err != nil {
+			return usuario, err, 500
+		}
+		usuario.ConsideracionesMedicas = append(usuario.ConsideracionesMedicas, consideracion)
+	}
+	return usuario, nil, 200
+}

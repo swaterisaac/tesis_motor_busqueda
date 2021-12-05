@@ -16,3 +16,13 @@ type Usuario struct {
 	FechaNacimiento string
 	IdComuna        int
 }
+
+type UsuarioApp struct {
+	ID                     int
+	Nombre                 string
+	Correo                 string
+	FechaNacimiento        string
+	Comuna                 string
+	Region                 string
+	ConsideracionesMedicas []string
+}

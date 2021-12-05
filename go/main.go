@@ -41,7 +41,7 @@ func main() {
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},
-		AllowHeaders:     []string{"Origin"},
+		AllowHeaders:     []string{"*"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 		AllowOriginFunc: func(origin string) bool {
@@ -53,6 +53,18 @@ func main() {
 	})
 	router.GET("/ofertasQuery", func(c *gin.Context) {
 		enrutador.ObtenerOfertasQuery(c, db, es)
+	})
+	router.GET("/usuarioPorCorreo", func(c *gin.Context) {
+		enrutador.ObtenerUsuarioPorCorreo(c, db)
+	})
+	router.GET("/obtenerRegiones", func(c *gin.Context) {
+		enrutador.ObtenerRegiones(c, db)
+	})
+	router.GET("/obtenerComunas", func(c *gin.Context) {
+		enrutador.ObtenerComunasPorRegion(c, db)
+	})
+	router.POST("/crearUsuario", func(c *gin.Context) {
+		enrutador.CrearUsuario(c, db)
 	})
 	router.Run(":3632")
 }
