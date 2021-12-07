@@ -11,10 +11,11 @@ IdComuna: int Con el id de la comuna a la que pertenece el usuario
 */
 type Usuario struct {
 	ID              int
-	Nombre          string
-	Correo          string
-	FechaNacimiento string
-	IdComuna        int
+	Nombre          string `validate:"required" form:"nombre"`
+	Correo          string `validate:"required,email" form:"correo"`
+	FechaNacimiento string `validate:"required" form:"fechaNacimiento"`
+	IdComuna        int    `validate:"required" form:"idComuna"`
+	Consideraciones []int  `form:"consideraciones"`
 }
 
 type UsuarioApp struct {

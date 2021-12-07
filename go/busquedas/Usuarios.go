@@ -3,6 +3,7 @@ package busquedas
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
 	"tesis/modelos"
 )
 
@@ -159,4 +160,22 @@ func ObtenerUsuarioPorCorreo(db *sql.DB, correo string) (modelos.UsuarioApp, err
 		usuario.ConsideracionesMedicas = append(usuario.ConsideracionesMedicas, consideracion)
 	}
 	return usuario, nil, 200
+}
+
+func CrearUsuario(db *sql.DB, usuario modelos.Usuario) int {
+	queryUsuario := fmt.Sprintf("INSERT INTO usuarios (nombre, correo, fecha_nacimiento, id_comuna) "+
+		"VALUES ('%s', '%s', '%s', %d) RETURNING id", usuario.Nombre, usuario.Correo, usuario.FechaNacimiento, usuario.IdComuna)
+	var idUsuario int
+
+	if err := db.QueryRow(queryUsuario).Scan(&idUsuario); err != nil {
+		return http.StatusInternalServerError
+	}
+	for _, idConsideracion := range usuario.Consideraciones {
+		queryConsideraciones := fmt.Sprintf("INSERT INTO usuario_consideraciones (id_usuario, id_consideracion) "+
+			"VALUES (%d, %d)", idUsuario, idConsideracion)
+		if err := db.QueryRow(queryConsideraciones).Err(); err != nil {
+			return http.StatusInternalServerError
+		}
+	}
+	return http.StatusCreated
 }

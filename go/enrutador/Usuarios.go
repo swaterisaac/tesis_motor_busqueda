@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"tesis/busquedas"
+	"tesis/modelos"
 
 	"github.com/gin-gonic/gin"
+	validator "github.com/go-playground/validator/v10"
 )
 
 func ObtenerUsuarioPorCorreo(c *gin.Context, db *sql.DB) {
@@ -38,11 +40,32 @@ func ObtenerUsuarioPorCorreo(c *gin.Context, db *sql.DB) {
 }
 
 func CrearUsuario(c *gin.Context, db *sql.DB) {
-	nombre := c.PostForm("nombre")
-	consideraciones := c.PostForm("consideraciones")
+	var usuario modelos.Usuario
+	if err := c.Bind(&usuario); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+			"msg":   "Error con el traspaso de datos",
+		})
+		return
+	}
+	validate := validator.New()
+	err := validate.Struct(&usuario)
 
-	fmt.Println("AQUI: ", nombre, consideraciones)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err,
+		})
+		return
+	}
+	fmt.Printf("Usuario: %+v\nConsideraciones:\n", usuario)
+
+	if codigo := busquedas.CrearUsuario(db, usuario); codigo == http.StatusInternalServerError {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Hay un error con el servidor",
+		})
+		return
+	}
 	c.JSON(http.StatusOK, gin.H{
-		"msg": "nada",
+		"msg": "Se ha creado el usuario",
 	})
 }
