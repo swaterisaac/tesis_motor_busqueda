@@ -19,11 +19,11 @@ type Usuario struct {
 }
 
 type UsuarioApp struct {
-	ID                     int
-	Nombre                 string
-	Correo                 string
-	FechaNacimiento        string
-	Comuna                 string
-	Region                 string
-	ConsideracionesMedicas []string
+	ID                     int      `json:"id"`
+	Nombre                 string   `json:"nombre"`
+	Correo                 string   `json:"correo"`
+	FechaNacimiento        string   `json:"fechaNacimiento"`
+	Comuna                 string   `json:"comuna"`
+	Region                 string   `json:"region"`
+	ConsideracionesMedicas []string `json:"consideracionesMedicas"`
 }

@@ -132,3 +132,31 @@ func ObtenerOfertasQuery(c *gin.Context, db *sql.DB, es *elasticsearch.Client) {
 	}
 	c.JSON(http.StatusOK, ofertas)
 }
+
+func ObtenerOfertaPorId(c *gin.Context, db *sql.DB) {
+	idOferta := c.Query("idOferta")
+	idOfertaNum, err := strconv.Atoi(idOferta)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+			"msg":   "No se ha ingresado idOferta como valor numérico",
+		})
+		return
+	}
+	oferta, err, codigo := busquedas.ObtenerOfertaPorId(db, idOfertaNum)
+
+	if codigo == http.StatusNotFound {
+		c.JSON(http.StatusNoContent, gin.H{
+			"error": "No existe oferta con ese id",
+		})
+		return
+	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"msg":   "Error de servidor",
+			"error": err,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, oferta)
+}

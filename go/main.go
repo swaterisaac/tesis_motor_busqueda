@@ -66,6 +66,9 @@ func main() {
 	router.GET("/obtenerConsideraciones", func(c *gin.Context) {
 		enrutador.ObtenerConsideracionesMedicas(c, db)
 	})
+	router.GET("/obtenerOfertaPorId", func(c *gin.Context) {
+		enrutador.ObtenerOfertaPorId(c, db)
+	})
 	router.POST("/crearUsuario", func(c *gin.Context) {
 		enrutador.CrearUsuario(c, db)
 	})
