@@ -72,5 +72,8 @@ func main() {
 	router.POST("/crearUsuario", func(c *gin.Context) {
 		enrutador.CrearUsuario(c, db)
 	})
+	router.POST("/crearHistorialBusqueda", func(c *gin.Context) {
+		enrutador.CrearHistorialBusqueda(c, db)
+	})
 	router.Run(":3632")
 }

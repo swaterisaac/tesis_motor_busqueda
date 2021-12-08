@@ -21,6 +21,8 @@ const puntajeBusquedasHistorial float32 = 0.02
 //Para modificar cuántas comunas, regiones y ofertas se contarán en el historial, modificar
 //el archivo de busquedas/comportamiento
 
+//Para modificar el límite de historial búsqueda a guardar, está en el archivo busquedas/Historial.go
+
 /*
 Entradas:
 comportamiento: modelos.Comportamiento El comportamiento de un usuario

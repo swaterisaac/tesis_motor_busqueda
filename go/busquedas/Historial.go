@@ -3,8 +3,12 @@ package busquedas
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
 	"tesis/modelos"
 )
+
+//Límite máximo a guardar de búsquedas por usuario:
+const limiteBusquedas = 100
 
 /*
 Entradas:
@@ -170,4 +174,40 @@ func ObtenerHistorialOfertasUsuario(db *sql.DB, idUsuario int, topOfertas int) (
 	}
 
 	return historiales, nil
+}
+
+func CrearHistorialBusqueda(db *sql.DB, idUsuario int, busqueda string) int {
+	queryContar := fmt.Sprintf("SELECT COUNT(*) "+
+		"FROM usuarios u, historial_busquedas hb "+
+		"WHERE u.id = %d AND hb.id_usuario = u.id", idUsuario)
+	var cantidadBusqueda int
+	err := db.QueryRow(queryContar).Scan(&cantidadBusqueda)
+
+	if err != nil {
+		return http.StatusInternalServerError
+	}
+
+	if cantidadBusqueda >= limiteBusquedas {
+		var idBusquedaAntigua int
+		queryBusquedaAntigua := fmt.Sprintf("SELECT hb.id "+
+			"FROM usuarios u, historial_busquedas hb "+
+			"WHERE u.id = %d AND u.id = hb.id_usuario "+
+			"ORDER BY hb.id ASC LIMIT 1", idUsuario)
+		if err := db.QueryRow(queryBusquedaAntigua).Scan(&idBusquedaAntigua); err != nil {
+			return http.StatusInternalServerError
+		}
+
+		queryBorrarBusqueda := fmt.Sprintf("DELETE FROM historial_busquedas hb WHERE hb.id = %d", idBusquedaAntigua)
+		if err = db.QueryRow(queryBorrarBusqueda).Err(); err != nil {
+			return http.StatusInternalServerError
+		}
+	}
+
+	queryCrearBusqueda := fmt.Sprintf("INSERT INTO historial_busquedas (consulta, frecuencia, id_usuario) "+
+		"VALUES ('%s', 1, %d)", busqueda, idUsuario)
+
+	if err := db.QueryRow(queryCrearBusqueda).Err(); err != nil {
+		return http.StatusInternalServerError
+	}
+	return http.StatusCreated
 }

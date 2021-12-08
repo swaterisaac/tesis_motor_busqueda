@@ -27,3 +27,8 @@ type UsuarioApp struct {
 	Region                 string   `json:"region"`
 	ConsideracionesMedicas []string `json:"consideracionesMedicas"`
 }
+
+type UsuarioHistorial struct {
+	Correo   string `form:"correo"`
+	Busqueda string `form:"busqueda"`
+}
