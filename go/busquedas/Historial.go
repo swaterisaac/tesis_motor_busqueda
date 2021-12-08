@@ -215,36 +215,34 @@ func CrearHistorialBusqueda(db *sql.DB, idUsuario int, busqueda string) int {
 //Sirve para crear historial comuna, region y oferta de manera general.
 func CrearHistorialGeneral(db *sql.DB, idUsuario int, idHistorial int, nombreTabla string, nombreForanea string) int {
 	var idExiste, frecuencia int
-	fmt.Println("-AAAA")
 	queryExiste := fmt.Sprintf("SELECT tg.id, tg.frecuencia "+
 		"FROM usuarios u, %s tg "+
 		"WHERE u.id = %d AND u.id = tg.id_usuario AND tg.%s = %d", nombreTabla, idUsuario, nombreForanea, idHistorial)
 	err := db.QueryRow(queryExiste).Scan(&idExiste, &frecuencia)
-	fmt.Println("A")
+
 	//Caso crear nueva tupla
 	if err == sql.ErrNoRows {
 		queryCrearTupla := fmt.Sprintf("INSERT INTO %s (frecuencia, id_usuario, %s) VALUES (1, %d, %d)", nombreTabla, nombreForanea, idUsuario, idHistorial)
 		if err = db.QueryRow(queryCrearTupla).Err(); err != nil {
-			fmt.Println(err)
+
 			return http.StatusInternalServerError
 		}
 		return http.StatusCreated
 	}
-	fmt.Println("B")
+
 	if err != nil {
-		fmt.Println(err)
+
 		return http.StatusInternalServerError
 	}
 	//Caso actualizar la antigua tupla
 	frecuencia += 1
 	queryActualizar := fmt.Sprintf("UPDATE %s SET frecuencia=%d WHERE id = %d", nombreTabla, frecuencia, idExiste)
 	err = db.QueryRow(queryActualizar).Err()
-	fmt.Println("C")
+
 	if err != nil {
-		fmt.Println(err)
 		return http.StatusInternalServerError
 	}
-	fmt.Println("D")
+
 	return http.StatusCreated
 }
 
@@ -269,26 +267,19 @@ func CrearHistoriales(db *sql.DB, idUsuario int, idOferta int) int {
 	queryUbicacion := fmt.Sprintf("SELECT c.id, r.id "+
 		"FROM comunas c, ofertas_turisticas ot, regiones r "+
 		"WHERE ot.id = %d AND ot.id_comuna = c.id AND c.id_region = r.id", idOferta)
-	fmt.Println("2A")
 	err := db.QueryRow(queryUbicacion).Scan(&idComuna, &idRegion)
 	if err == sql.ErrNoRows {
 		return http.StatusNotFound
 	}
 	if err != nil {
-		fmt.Println(err)
 		return http.StatusInternalServerError
 	}
-	fmt.Println("2D")
+
 	codigoOferta := CrearHistorialOferta(db, idUsuario, idOferta)
-	fmt.Println("2E")
 	codigoComuna := CrearHistorialComuna(db, idUsuario, idComuna)
-	fmt.Println("2F")
 	codigoRegion := CrearHistorialRegion(db, idUsuario, idRegion)
-	fmt.Println("2G")
 	if codigoOferta != http.StatusCreated || codigoComuna != http.StatusCreated || codigoRegion != http.StatusCreated {
-		fmt.Println("2H")
 		return http.StatusInternalServerError
 	}
-	fmt.Println("2I")
 	return http.StatusCreated
 }
