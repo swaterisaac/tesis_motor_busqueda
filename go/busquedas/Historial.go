@@ -61,10 +61,11 @@ error: Error en caso de que algo salga mal
 Descripción: Recopila el historial de las comunas de las ofertas turísticas que ha buscado un
 usuario específico
 */
-func ObtenerHistorialComunaUsuario(db *sql.DB, idUsuario int) ([]modelos.Historial, error) {
+func ObtenerHistorialComunaUsuario(db *sql.DB, idUsuario int, topComuna int) ([]modelos.Historial, error) {
 	query := fmt.Sprintf("SELECT c.nombre, hc.frecuencia "+
 		"FROM usuarios u, historial_comunas hc, comunas c "+
-		"WHERE u.id = %d and hc.id_usuario = u.id and c.id = hc.id_comuna ", idUsuario)
+		"WHERE u.id = %d and hc.id_usuario = u.id and c.id = hc.id_comuna "+
+		"ORDER BY hc.frecuencia DESC LIMIT %d", idUsuario, topComuna)
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
@@ -102,10 +103,11 @@ error: Error en caso de que algo salga mal
 Descripción: Recopila el historial de las regiones de las ofertas turísticas que ha buscado un
 usuario específico.
 */
-func ObtenerHistorialRegionUsuario(db *sql.DB, idUsuario int) ([]modelos.Historial, error) {
+func ObtenerHistorialRegionUsuario(db *sql.DB, idUsuario int, topRegion int) ([]modelos.Historial, error) {
 	query := fmt.Sprintf("SELECT r.nombre, hr.frecuencia "+
 		"FROM usuarios u, historial_regiones hr, regiones r "+
-		"WHERE u.id = %d and hr.id_usuario = u.id and r.id = hr.id_region", idUsuario)
+		"WHERE u.id = %d and hr.id_usuario = u.id and r.id = hr.id_region "+
+		"ORDER BY hr.frecuencia DESC LIMIT %d", idUsuario, topRegion)
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
@@ -143,10 +145,11 @@ error: Error en caso de que algo salga mal
 Descripción: Obtiene el historial de todas las ofertas turísticas que ha buscado un
 usuario específico
 */
-func ObtenerHistorialOfertasUsuario(db *sql.DB, idUsuario int) ([]modelos.Historial, error) {
+func ObtenerHistorialOfertasUsuario(db *sql.DB, idUsuario int, topOfertas int) ([]modelos.Historial, error) {
 	query := fmt.Sprintf("SELECT ot.nombre, ho.frecuencia "+
 		"FROM usuarios u, historial_ofertas ho, ofertas_turisticas ot "+
-		"WHERE u.id = %d and ho.id_usuario = u.id and ot.id = ho.id_oferta", idUsuario)
+		"WHERE u.id = %d and ho.id_usuario = u.id and ot.id = ho.id_oferta "+
+		"ORDER BY ho.frecuencia DESC LIMIT %d", idUsuario, topOfertas)
 	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err

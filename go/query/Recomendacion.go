@@ -18,6 +18,9 @@ const puntajeBusquedasHistorial float32 = 0.02
 //Puntaje NEGATIVO de la ubicacion del usuario
 //const puntajeUbicacion float32 = 0.1
 
+//Para modificar cuántas comunas, regiones y ofertas se contarán en el historial, modificar
+//el archivo de busquedas/comportamiento
+
 /*
 Entradas:
 comportamiento: modelos.Comportamiento El comportamiento de un usuario

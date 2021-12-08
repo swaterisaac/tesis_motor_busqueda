@@ -6,6 +6,15 @@ import (
 	"tesis/modelos"
 )
 
+//Cuántas regiones se contarán en la recomendación
+const topRegiones = 10
+
+//Cuántas comunas se contarán en la recomendación
+const topComunas = 10
+
+//Cuántas ofertas se contarán en la recomendación
+const topOfertas = 5
+
 /*
 Entradas:
 db: *sql.DB sacado de la librería database/sql. Manejador de conexión a bases de datos mysql
@@ -49,7 +58,7 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, e
 		canalContenidoHistorialBusqueda <- historialBusqueda
 	}()
 	go func() {
-		historialOfertas, err := ObtenerHistorialOfertasUsuario(db, idUsuario)
+		historialOfertas, err := ObtenerHistorialOfertasUsuario(db, idUsuario, topOfertas)
 		if err != nil {
 			canalError <- err
 		}
@@ -57,7 +66,7 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, e
 		canalContenidoHistorialOferta <- historialOfertas
 	}()
 	go func() {
-		historialRegion, err := ObtenerHistorialRegionUsuario(db, idUsuario)
+		historialRegion, err := ObtenerHistorialRegionUsuario(db, idUsuario, topRegiones)
 		if err != nil {
 			canalError <- err
 		}
@@ -65,7 +74,7 @@ func ObtenerComportamiento(db *sql.DB, idUsuario int) (modelos.Comportamiento, e
 		canalContenidoHistorialRegion <- historialRegion
 	}()
 	go func() {
-		historialComuna, err := ObtenerHistorialComunaUsuario(db, idUsuario)
+		historialComuna, err := ObtenerHistorialComunaUsuario(db, idUsuario, topComunas)
 		if err != nil {
 			canalError <- err
 		}

@@ -32,7 +32,7 @@ func ObtenerOfertaPorId(db *sql.DB, id int) (modelos.OfertaTuristica, error, int
 	return oferta, nil, 200
 }
 
-//Obtención de querys a elasticsearch
+//Obtención de querys a elasticsearch obteniendo el comportamiento del usuario
 func queryRecomendacion(db *sql.DB, idUsuario int, tamanio int, pagina int) (map[string]interface{}, error) {
 	comportamiento, err := ObtenerComportamiento(db, idUsuario)
 	if err != nil {
