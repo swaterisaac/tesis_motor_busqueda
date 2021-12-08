@@ -32,3 +32,8 @@ type UsuarioHistorial struct {
 	Correo   string `form:"correo"`
 	Busqueda string `form:"busqueda"`
 }
+
+type UsuarioHistoriales struct {
+	Correo   string `form:"correo"`
+	IdOferta int    `form:"idOferta"`
+}
