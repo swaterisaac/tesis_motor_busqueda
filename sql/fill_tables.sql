@@ -1,52 +1,384 @@
 --Regiones
-insert into regiones (nombre) values ('High Prairie');
-insert into regiones (nombre) values ('Gēdo');
-insert into regiones (nombre) values ('Tawun');
-insert into regiones (nombre) values ('Samajie Ewenkeminzu');
-insert into regiones (nombre) values ('Chengfeng');
-insert into regiones (nombre) values ('Włosienica');
-insert into regiones (nombre) values ('Kirovsk');
-insert into regiones (nombre) values ('Bicas');
-insert into regiones (nombre) values ('Senj');
-insert into regiones (nombre) values ('Libourne');
+INSERT INTO regiones (nombre, abreviatura, capital)
+VALUES
+	('Arica y Parinacota','AP','Arica'),
+	('Tarapacá','TA','Iquique'),
+	('Antofagasta','AN','Antofagasta'),
+	('Atacama','AT','Copiapó'),
+	('Coquimbo','CO','La Serena'),
+	('Valparaiso','VA','valparaíso'),
+	('Metropolitana de Santiago','RM','Santiago'),
+	('Libertador General Bernardo OHiggins','OH','Rancagua'),
+	('Maule','MA','Talca'),
+	('Ñuble','NB','Chillán'),
+	('Biobío','BI','Concepción'),
+	('La Araucanía','IAR','Temuco'),
+	('Los Ríos','LR','Valdivia'),
+	('Los Lagos','LL','Puerto Montt'),
+	('Aysén del General Carlos Ibáñez del Campo','AI','Coyhaique'),
+	('Magallanes y de la Antártica Chilena','MG','Punta Arenas');
 
 
 --Consideraciones Médicas
-insert into consideraciones_medicas (nombre, descripcion) values ('ccotesford0', 'HDR Brachytherapy of Thymus using Cesium 137');
-insert into consideraciones_medicas (nombre, descripcion) values ('cknowlys1', 'Drainage of Lower Jaw, Open Approach');
-insert into consideraciones_medicas (nombre, descripcion) values ('rhymer2', 'Insertion of Defib Lead into Pericardium, Open Approach');
-insert into consideraciones_medicas (nombre, descripcion) values ('gweetch3', 'Dilate R Subclav Art w 4+ Intralum Dev, Perc Endo');
-insert into consideraciones_medicas (nombre, descripcion) values ('bcreevy4', 'Bypass R Com Iliac Art to L Femor A w Autol Vn, Open');
-insert into consideraciones_medicas (nombre, descripcion) values ('matwill5', 'Release Lower Esophagus, Percutaneous Endoscopic Approach');
-insert into consideraciones_medicas (nombre, descripcion) values ('cmarryatt6', 'Fluoroscopy of Gallbl, Bile, Pancr Duct using H Osm Contrast');
-insert into consideraciones_medicas (nombre, descripcion) values ('qmckintosh7', 'Acoustic Reflex Decay Assessment using Tympanometer');
-insert into consideraciones_medicas (nombre, descripcion) values ('cgussie8', 'Fragmentation in Transverse Colon, Endo');
-insert into consideraciones_medicas (nombre, descripcion) values ('eknewstub9', 'Excision of Inferior Vena Cava, Open Approach, Diagnostic');
-insert into consideraciones_medicas (nombre, descripcion) values ('ahentzera', 'Monitoring of Temperature, Via Natural or Artificial Opening');
-insert into consideraciones_medicas (nombre, descripcion) values ('hfetterb', 'Destruction of Left Upper Lobe Bronchus, Via Opening');
-insert into consideraciones_medicas (nombre, descripcion) values ('mmatuszewskic', 'Drainage of Lingula Bronchus with Drainage Device, Endo');
-insert into consideraciones_medicas (nombre, descripcion)values('vblazhevichd', 'Extirpation of Matter from Mediastinum, External Approach');
-insert into consideraciones_medicas (nombre, descripcion)values('hvisee', 'Division of Left Temporal Bone, Perc Endo Approach');
-
+insert into consideraciones_medicas (nombre, descripcion) values ('Ninguna', 'Ninguna');
+insert into consideraciones_medicas (nombre, descripcion) values ('Problemas de visión', 'Miopía, astigmatismo, etc');
+insert into consideraciones_medicas (nombre, descripcion) values ('Problemas cardiovasculares', 'Problemas al corazón');
+insert into consideraciones_medicas (nombre, descripcion) values ('Problemas de movilidad', 'Considerar sitios con accesibilidad de movilidad');
+insert into consideraciones_medicas (nombre, descripcion) values ('Diabetes', 'Problemas de azúcar');
+insert into consideraciones_medicas (nombre, descripcion) values ('Hipertensión', 'Tensión alta');
 
 --Proveedores
-insert into proveedores (nombre) values ('Kunde, Auer and Friesen');
-insert into proveedores (nombre) values ('Howell Group');
-insert into proveedores (nombre) values ('Larson and Sons');
-insert into proveedores (nombre) values ('Toy, Raynor and Terry');
-
+insert into proveedores (nombre, web, telefono, correo) values ('Sernatur', 'https://www.sernatur.cl/', '600 600 60 66', 'turismoatiende@sernatur.cl');
 
 --Comunas
-insert into comunas (nombre, id_region) values ('Way', 1);
-insert into comunas (nombre, id_region) values ('Park', 2);
-insert into comunas (nombre, id_region) values ('Hill', 3);
-insert into comunas (nombre, id_region) values ('Plaza', 4);
-insert into comunas (nombre, id_region) values ('Terrace', 5);
-insert into comunas (nombre, id_region) values ('Court', 6);
-insert into comunas (nombre, id_region) values ('Terrace', 7);
-insert into comunas (nombre, id_region) values ('Circle', 8);
-insert into comunas (nombre, id_region) values ('Terrace', 9);
-insert into comunas (nombre, id_region) values ('Point', 10);
+INSERT INTO comunas (nombre,id_region)
+VALUES
+	('Arica',1),
+	('Camarones',1),
+	('General Lagos',1),
+	('Putre',1),
+	('Alto Hospicio',2),
+	('Iquique',2),
+	('Camiña',2),
+	('Colchane',2),
+	('Huara',2),
+	('Pica',2),
+	('Pozo Almonte',2),
+    ('Tocopilla',3),
+    ('María Elena',3),
+	('Calama',3),
+	('Ollague',3),
+	('San Pedro de Atacama',3),
+    ('Antofagasta',3),
+	('Mejillones',3),
+	('Sierra Gorda',3),
+	('Taltal',3),
+	('Chañaral',4),
+	('Diego de Almagro',4),
+    ('Copiapó',4),
+	('Caldera',4),
+	('Tierra Amarilla',4),
+    ('Vallenar',14),
+	('Alto del Carmen',4),
+	('Freirina',4),
+	('Huasco',4),
+	('La Serena',5),
+    ('Coquimbo',5),
+    ('Andacollo',5),
+    ('La Higuera',5),
+    ('Paihuano',5),
+	('Vicuña',5),
+	('Ovalle',5),
+    ('Combarbalá',5),
+    ('Monte Patria',5),
+    ('Punitaqui',5),
+	('Río Hurtado',5),
+	('Illapel',5),
+	('Canela',5),
+	('Los Vilos',5),
+	('Salamanca',6),
+	('La Ligua',6),
+    ('Cabildo',6),
+	('Zapallar',6),
+    ('Papudo',6),
+	('Petorca',6),
+	('Los Andes',6),
+	('San Esteban',6),
+    ('Calle Larga',6),
+    ('Rinconada',6),
+	('San Felipe',6),
+    ('Llaillay',6),
+    ('Putaendo',6),
+	('Santa María',6),
+	('Catemu',6),
+	('Panquehue',6),
+    ('Quillota',6),
+    ('La Cruz',6),
+	('La Calera',6),
+	('Nogales',6),
+    ('Hijuelas',6),
+	('Valparaíso',6),	
+    ('Viña del Mar',6),
+	('Concón',6),
+ 	('Quintero',6),
+    ('Puchuncaví',6),
+	('Casablanca',6),
+	('Juan Fernández',6),
+	('San Antonio',6),
+    ('Cartagena',6),
+	('El Tabo',6),
+	('El Quisco',6),
+	('Algarrobo',6),
+	('Santo Domingo',6),
+	('Isla de Pascua',6),
+	('Quilpué',6),
+	('Limache',6),
+	('Olmué',6),
+	('Villa Alemana',6),
+	('Colina',7),
+	('Lampa',7),
+	('Tiltil',7),
+	('Santiago',7),
+	('Vitacura',7),
+    ('San Ramón',7),
+	('San Miguel',7),
+	('San Joaquín',7),
+    ('Renca',7),
+	('Recoleta',7),
+    ('Quinta Normal',7),
+	('Quilicura',7),
+    ('Pudahuel',7),
+    ('Providencia',7),
+	('Peñalolén',7),
+    ('Pedro Aguirre Cerda',7),
+	('Ñuñoa',7),
+	('Maipú',7),
+	('Macul',7),
+	('Lo Prado',7),
+	('Lo Espejo',7),
+	('Lo Barnechea',7),
+	('Las Condes',7),
+	('La Reina',7),
+	('La Pintana',7),
+	('La Granja',7),
+	('La Florida',7),
+    ('La Cisterna',7),
+    ('Independencia',7),
+    ('Huechuraba',7),
+	('Estación Central',7),
+    ('El Bosque',7),
+    ('Conchalí',7),
+    ('Cerro Navia',7),
+    ('Cerrillos',7),
+	('Puente Alto',7),
+	('San José de Maipo',7),
+    ('Pirque',7),
+	('San Bernardo',7),
+	('Buin',7),
+    ('Paine',7),
+	('Calera de Tango',7),
+	('Melipilla',7),
+	('Alhué',7),
+	('Curacaví',7),
+	('María Pinto',7),
+	('San Pedro',7),
+	('Isla de Maipo',7),
+    ('El Monte',7),
+	('Padre Hurtado',7),
+	('Peñaflor',7),
+	('Talagante',7),
+	('Codegua',8),
+	('Coínco',8),
+	('Coltauco',8),
+	('Doñihue',8),
+	('Graneros',8),
+	('Las Cabras',8),
+	('Machalí',8),
+	('Malloa',8),
+	('Mostazal',8),
+	('Olivar',8),
+	('Peumo',8),
+	('Pichidegua',8),
+	('Quinta de Tilcoco',8),
+	('Rancagua',8),
+	('Rengo',8),
+	('Requínoa',8),
+	('San Vicente de Tagua Tagua',8),
+	('Chépica',8),
+	('Chimbarongo',8),
+	('Lolol',8),
+    ('Nancagua',8),
+    ('Palmilla',8),
+    ('Peralillo',8),
+	('Placilla',8),
+ 	('Pumanque',8),
+	('San Fernando',8),
+	('Santa Cruz',8),
+	('La Estrella',8),
+	('Litueche',8),
+	('Marchigüe',8),
+	('Navidad',8),
+	('Paredones',8),
+	('Pichilemu',8),
+	('Curicó',9),
+	('Hualañé',9),
+	('Licantén',9),
+ 	('Molina',9),
+	('Rauco',9),
+	('Romeral',9),
+	('Sagrada Familia',9),
+	('Teno',9),
+	('Vichuquén',9),
+	('Talca',9),
+	('San Clemente',9),
+	('Pelarco',9),
+	('Pencahue',9),
+	('Maule',9),
+	('San Rafael',9),
+	('Curepto',9),
+	('Constitución',9),
+	('Empedrado',9),
+	('Río Claro',9),
+    ('Linares',9),
+	('San Javier',9),
+	('Parral',9),
+	('Villa Alegre',9),
+	('Longaví',9),
+	('Colbún',9),
+	('Retiro',9),
+	('Yerbas Buenas',9),
+    ('Cauquenes',9),
+	('Chanco',9),
+	('Pelluhue',9),
+	('Bulnes',10),
+	('Chillán',10),
+	('Chillán Viejo',10),
+	('El Carmen',10),
+	('Pemuco',10),
+	('Pinto',10),
+	('Quillón',10),
+	('San Ignacio',10),
+	('Yungay',10),
+	('Cobquecura',10),
+	('Coelemu',10),
+	('Ninhue',10),
+	('Portezuelo',10),
+	('Quirihue',10),
+	('Ránquil',10),
+	('Treguaco',10),
+	('San Carlos',10),
+	('Coihueco',10),
+	('San Nicolás',10),
+	('Ñiquén',10),
+	('San Fabián',10),
+	('Alto Biobío',11),
+	('Antuco',11),
+	('Cabrero',11),
+	('Laja',11),
+	('Los Ángeles',11),
+	('Mulchén',11),
+	('Nacimiento',11),
+	('Negrete',11),
+	('Quilaco',11),
+	('Quilleco',11),
+	('San Rosendo',11),
+	('Santa Bárbara',11),
+	('Tucapel',11),
+	('Yumbel',11),
+	('Concepción',11),
+	('Coronel',11),
+	('Chiguayante',11),
+	('Florida',11),
+	('Hualpén',11),
+	('Hualqui',11),
+	('Lota',11),
+	('Penco',11),
+	('San Pedro de La Paz',11),
+	('Santa Juana',11),
+	('Talcahuano',11),
+	('Tomé',11),
+	('Arauco',11),
+	('Cañete',11),
+	('Contulmo',11),
+	('Curanilahue',11),
+	('Lebu',11),
+	('Los Álamos',11),
+	('Tirúa',11),
+	('Angol',12),
+	('Collipulli',12),
+	('Curacautín',12),
+	('Ercilla',12),
+	('Lonquimay',12),
+	('Los Sauces',12),
+	('Lumaco',12),
+	('Purén',12),
+	('Renaico',12),
+	('Traiguén',12),
+	('Victoria',12),
+	('Temuco',12),
+	('Carahue',12),
+	('Cholchol',12),
+	('Cunco',12),
+	('Curarrehue',12),
+	('Freire',12),
+	('Galvarino',12),
+	('Gorbea',12),
+	('Lautaro',12),
+	('Loncoche',12),
+	('Melipeuco',12),
+	('Nueva Imperial',12),
+	('Padre Las Casas',12),
+	('Perquenco',12),
+	('Pitrufquén',12),
+	('Pucón',12),
+	('Saavedra',12),
+	('Teodoro Schmidt',12),
+	('Toltén',12),
+	('Vilcún',12),
+	('Villarrica',12),
+	('Valdivia',13),
+	('Corral',13),
+	('Lanco',13),
+	('Los Lagos',13),
+	('Máfil',13),
+	('Mariquina',13),
+	('Paillaco',13),
+	('Panguipulli',13),
+	('La Unión',13),
+	('Futrono',13),
+	('Lago Ranco',13),
+	('Río Bueno',13),
+	('Osorno',14),
+	('Puerto Octay',14),
+	('Purranque',14),
+	('Puyehue',14),
+	('Río Negro',14),
+	('San Juan de la Costa',14),
+	('San Pablo',14),
+	('Calbuco',14),
+	('Cochamó',14),
+	('Fresia',14),
+	('Frutillar',14),
+	('Llanquihue',14),
+	('Los Muermos',14),
+	('Maullín',14),
+	('Puerto Montt',14),
+	('Puerto Varas',14),
+	('Ancud',14),
+	('Castro',14),
+	('Chonchi',14),
+	('Curaco de Vélez',14),
+	('Dalcahue',14),
+	('Puqueldón',14),
+	('Queilén',14),
+	('Quellón',14),
+	('Quemchi',14),
+	('Quinchao',14),
+	('Chaitén',14),
+	('Futaleufú',14),
+	('Hualaihué',14),
+	('Palena',14),
+	('Lago Verde',15),
+	('Coihaique',15),
+	('Aysén',15),
+	('Cisnes',15),
+	('Guaitecas',15),
+	('Río Ibáñez',15),
+	('Chile Chico',15),
+	('Cochrane',15),
+	('OHiggins',15),
+	('Tortel',15),
+	('Natales',16),
+	('Torres del Paine',16),
+	('Laguna Blanca',16),
+	('Punta Arenas',16),
+	('Río Verde',16),
+	('San Gregorio',16),
+	('Porvenir',16),
+	('Primavera',16),
+	('Timaukel',16),
+	('Cabo de Hornos',16),
+	('Antártica',16);
 
 
 --Usuarios
@@ -187,35 +519,35 @@ insert into historial_busquedas (consulta, frecuencia, id_usuario) values ( 'Fus
 -- Ofertas turísticas
 
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Utah', 81603, '2020-06-23', '2021-05-08', 1, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Donald', 17865, '2019-04-26', '2021-01-27', 4, 5);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Packers', 67991, '2019-05-28', '2021-06-17', 3, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Meadow Vale', 5789, '2019-04-18', '2021-08-16', 4, 8);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Lindbergh', 55644, '2021-01-12', '2021-10-09', 2, 8);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Donald', 17865, '2019-04-26', '2021-01-27', 1, 5);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Packers', 67991, '2019-05-28', '2021-06-17', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Meadow Vale', 5789, '2019-04-18', '2021-08-16', 1, 8);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Lindbergh', 55644, '2021-01-12', '2021-10-09', 1, 8);
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Monterey', 95944, '2020-03-14', '2021-08-07', 1, 6);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Tony', 67138, '2019-06-28', '2021-04-25', 2, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Tony', 67138, '2019-06-28', '2021-04-25', 1, 6);
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Forest Dale', 79426, '2019-09-15', '2021-06-11', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Oriole', 8904, '2019-02-13', '2021-04-25', 4, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Oriole', 8904, '2019-02-13', '2021-04-25', 1, 1);
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Arizona', 28384, '2019-08-26', '2020-10-27', 1, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Evergreen', 82919, '2019-11-19', '2021-05-29', 2, 1);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Warbler', 22965, '2020-06-15', '2020-10-29', 2, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Clove', 59926, '2020-12-17', '2021-04-28', 4, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Evergreen', 82919, '2019-11-19', '2021-05-29', 1, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Warbler', 22965, '2020-06-15', '2020-10-29', 1, 9);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Clove', 59926, '2020-12-17', '2021-04-28', 1, 3);
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Dryden', 65888, '2020-12-07', '2021-03-13', 1, 4);
 insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Sundown', 65560, '2019-02-13', '2020-12-15', 1, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Nancy', 85047, '2020-12-21', '2021-01-18', 3, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ridge Oak', 66201, '2020-12-05', '2021-09-20', 4, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Hovde', 38419, '2020-04-04', '2021-02-10', 2, 4);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Havey', 93150, '2020-03-05', '2021-09-15', 2, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Bellgrove', 37357, '2019-05-22', '2021-07-24', 3, 4);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Kropf', 10245, '2020-05-07', '2021-01-28', 3, 1);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Acker', 32937, '2019-09-23', '2021-04-06', 4, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Grayhawk', 9408, '2020-11-11', '2020-12-30', 3, 2);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ( 'Bay', 25542, '2019-12-05', '2020-11-29', 4, 6);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Marquette', 7983, '2020-06-03', '2021-06-23', 2, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Pennsylvania', 11770, '2019-05-08', '2021-10-06', 2, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Jenifer', 97398, '2019-04-18', '2021-08-31', 3, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Carey', 13436, '2019-04-27', '2021-05-26', 4, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Schlimgen', 35435, '2020-08-05', '2021-02-27', 3, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ohio', 53685, '2019-10-08', '2021-07-02', 2, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Nancy', 85047, '2020-12-21', '2021-01-18', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ridge Oak', 66201, '2020-12-05', '2021-09-20', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Hovde', 38419, '2020-04-04', '2021-02-10', 1, 4);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Havey', 93150, '2020-03-05', '2021-09-15', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Bellgrove', 37357, '2019-05-22', '2021-07-24', 1, 4);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Kropf', 10245, '2020-05-07', '2021-01-28', 1, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Acker', 32937, '2019-09-23', '2021-04-06', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Grayhawk', 9408, '2020-11-11', '2020-12-30', 1, 2);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ( 'Bay', 25542, '2019-12-05', '2020-11-29', 1, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Marquette', 7983, '2020-06-03', '2021-06-23', 1, 7);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Pennsylvania', 11770, '2019-05-08', '2021-10-06', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Jenifer', 97398, '2019-04-18', '2021-08-31', 1, 9);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Carey', 13436, '2019-04-27', '2021-05-26', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Schlimgen', 35435, '2020-08-05', '2021-02-27', 1, 7);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ohio', 53685, '2019-10-08', '2021-07-02', 1, 6);
 
 --Historial regiones
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (99, 9, 6);
@@ -429,31 +761,31 @@ insert into usuario_consideraciones (id_usuario, id_consideracion) values (29, 4
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (18, 2);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 5);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (20, 5);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (19, 1);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (19, 2);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (18, 6);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (23, 5);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 2);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (15, 4);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (9, 8);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (4, 8);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (9, 5);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (4, 6);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (5, 4);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (26, 7);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (26, 6);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (8, 4);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (6, 5);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (22, 3);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 1);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 10);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (11, 8);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 6);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (11, 5);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (8, 3);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (29, 1);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (29, 2);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (19, 3);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (26, 8);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (26, 6);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (4, 6);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (27, 4);
 insert into usuario_consideraciones (id_usuario, id_consideracion) values (11, 5);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (28, 9);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (23, 8);
-insert into usuario_consideraciones (id_usuario, id_consideracion) values (13, 9);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (28, 5);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (23, 6);
+insert into usuario_consideraciones (id_usuario, id_consideracion) values (13, 5);
 
 --Historial oferta
 insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (83, 2, 9);
@@ -558,33 +890,46 @@ insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (770, 1
 insert into historial_ofertas (frecuencia, id_usuario, id_oferta) values (234, 14, 10);
 
 --Oferta consideración
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (15, 3);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 3);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 3);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (8, 12);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (12, 17);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (9, 15);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 26);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (1, 11);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (1, 27);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (10, 25);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (9, 8);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (14, 24);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (7, 16);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 7);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (7, 30);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 12);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 17);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 15);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 26);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 11);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 27);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 25);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 8);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 24);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 16);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 7);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 30);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 14);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (15, 7);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (12, 26);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 7);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 26);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 18);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 8);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (11, 30);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 30);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 19);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (8, 13);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (11, 13);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (10, 1);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (1, 16);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (13, 23);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (13, 26);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (6, 13);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 13);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 1);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 16);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 23);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 26);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 11);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (14, 18);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (8, 24);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 18);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (6, 24);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 19);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 19);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 2);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 4);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 5);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 6);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 9);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 10);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 20);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 21);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 22);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 28);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 29);

@@ -1,108 +1,61 @@
 {
     "index_patterns": "testlogstash*",
-    "settings":
-    {
-        "index.refresh_interval" : "5s",
+    "settings": {
+        "index.refresh_interval": "5s",
         "number_of_shards": 2,
         "number_of_replicas": 0,
-        "index":
-        {
-            "analysis":
-            {
-                "filter":
-                {
-                    "english_stop":
-                    {
-                        "type": "stop",
-                        "stopwords": "_english_"
-                    },
-                    "english_stemmer":
-                    {
-                        "type": "stemmer",
-                        "language": "english"
-                    },
-                    "english_synonyms":
-                    {
-                        "type": "synonym",
-                        "synonyms":
-                        [
-                            "shwarzenegger",
-                            "schwarzeneger",
-                            "chuache"
-                        ]
-                    }
+        "analysis": {
+            "filter": {
+                "spanish_stop": {
+                    "type": "stop",
+                    "stopwords": "_spanish_"
                 },
-                "normalizer":
-                {
-                    "lowercase":
-                    {
-                        "type": "custom",
-                        "filter":
-                        [
-                            "lowercase"
-                        ]
-                    }
+                "spanish_keywords": {
+                    "type": "keyword_marker",
+                    "keywords": [
+                        "ejemplo"
+                    ]
                 },
-                "analyzer":
-                {
-                    "lowercase":
-                    {
-                        "tokenizer": "keyword",
-                        "filter":
-                        [
-                            "lowercase"
-                        ]
-                    },
-                    "english":
-                    {
-                        "tokenizer": "standard",
-                        "filter":
-                        [
-                            "lowercase",
-                            "english_stop",
-                            "english_stemmer"
-                        ]
-                    },
-                    "english_with_synonyms":
-                    {
-                        "tokenizer": "standard",
-                        "filter":
-                        [
-                            "lowercase",
-                            "english_stop",
-                            "english_synonyms",
-                            "english_stemmer"
-                        ]
-                    }
+                "spanish_stemmer": {
+                    "type": "stemmer",
+                    "language": "light_spanish"
+                }
+            },
+            "analyzer": {
+                "rebuilt_spanish": {
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "spanish_stop",
+                        "spanish_keywords",
+                        "spanish_stemmer"
+                    ]
                 }
             }
         }
     },
-    "mappings":{
-        "testlogstash":{
+    "mappings": {
+        "testlogstash": {
             "dynamic": false,
             "properties": {
                 "descriptor": {
                     "type": "text",
-                    "analyzer": "english",
-                    "search_analyzer": "english"
+                    "analyzer": "rebuilt_spanish",
+                    "search_analyzer": "rebuilt_spanish"
                 },
-
                 "precio": {
                     "type": "long"
                 },
-
-                "fecha_inicio":{
+                "fecha_inicio": {
                     "type": "date"
                 },
-                "fecha_final":{
+                "fecha_final": {
                     "type": "date"
                 },
-
-                "idEnDB":{
+                "idEnDB": {
                     "type": "long"
                 },
-                "consideraciones":{
+                "consideraciones": {
                     "type": "keyword"
                 }
             }

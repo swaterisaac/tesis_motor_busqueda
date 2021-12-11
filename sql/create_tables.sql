@@ -7,7 +7,9 @@ CREATE TABLE IF NOT EXISTS scrapings (
 
 CREATE TABLE IF NOT EXISTS regiones (
   id SERIAL NOT NULL,
-  nombre varchar(50) NOT NULL,
+  nombre varchar(64) NOT NULL,
+  abreviatura varchar(5) NOT NULL,
+  capital varchar(64) NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -21,6 +23,9 @@ CREATE TABLE IF NOT EXISTS consideraciones_medicas (
 CREATE TABLE IF NOT EXISTS proveedores (
   id SERIAL NOT NULL,
   nombre varchar(50) NOT NULL,
+  web text,
+  telefono varchar(15),
+  correo varchar(320), 
   PRIMARY KEY (id)
 );
 
