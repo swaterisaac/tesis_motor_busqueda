@@ -63,6 +63,9 @@ func main() {
 	router.GET("/obtenerComunas", func(c *gin.Context) {
 		enrutador.ObtenerComunasPorRegion(c, db)
 	})
+	router.GET("/obtenerProveedores", func(c *gin.Context) {
+		enrutador.ObtenerProveedores(c, db)
+	})
 	router.GET("/obtenerConsideraciones", func(c *gin.Context) {
 		enrutador.ObtenerConsideracionesMedicas(c, db)
 	})

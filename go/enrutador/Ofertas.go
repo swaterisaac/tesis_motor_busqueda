@@ -2,9 +2,11 @@ package enrutador
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 	"strconv"
 	"tesis/busquedas"
+	"tesis/modelos"
 
 	"github.com/elastic/go-elasticsearch/v6"
 	"github.com/gin-gonic/gin"
@@ -73,6 +75,20 @@ func ObtenerOfertasQuery(c *gin.Context, db *sql.DB, es *elasticsearch.Client) {
 	tamanio := c.DefaultQuery("tamanio", "6")
 	pagina := c.DefaultQuery("pagina", "1")
 	query := c.Query("query")
+	filtroComuna := c.Query("filtroComuna")
+	filtroRegion := c.Query("filtroRegion")
+	filtroProveedor := c.Query("filtroProveedor")
+	if filtroComuna != "" {
+		query += " " + filtroComuna
+	}
+	if filtroRegion != "" {
+		query += " " + filtroRegion
+	}
+	if filtroProveedor != "" {
+		query += " " + filtroProveedor
+	}
+
+	existeFiltro := filtroComuna != "" || filtroRegion != "" || filtroProveedor != ""
 
 	tamanioNum, errTamanio := strconv.Atoi(tamanio)
 	paginaNum, errPagina := strconv.Atoi(pagina)
@@ -96,12 +112,6 @@ func ObtenerOfertasQuery(c *gin.Context, db *sql.DB, es *elasticsearch.Client) {
 		return
 	}
 
-	if query == "" {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"msg": "No se ha ingresado ninguna query",
-		})
-		return
-	}
 	id, err, codigo := busquedas.ObtenerIdUsarioPorCorreo(db, correo)
 
 	if codigo == http.StatusNotFound {
@@ -128,6 +138,23 @@ func ObtenerOfertasQuery(c *gin.Context, db *sql.DB, es *elasticsearch.Client) {
 		c.JSON(http.StatusNoContent, gin.H{
 			"error": "No hay ofertas",
 		})
+		return
+	}
+	var ofertasFiltradas []modelos.OfertaTuristica
+	if existeFiltro {
+		fmt.Println("ALO")
+		for _, oferta := range ofertas {
+			if (oferta.Comuna == filtroComuna || filtroComuna == "") && (oferta.Region == filtroRegion || filtroRegion == "") && (oferta.Proveedor == filtroProveedor || filtroProveedor == "") {
+				ofertasFiltradas = append(ofertasFiltradas, oferta)
+			}
+		}
+		if len(ofertasFiltradas) == 0 {
+			c.JSON(http.StatusNoContent, gin.H{
+				"error": "No hay ofertas",
+			})
+			return
+		}
+		c.JSON(http.StatusOK, ofertasFiltradas)
 		return
 	}
 	c.JSON(http.StatusOK, ofertas)
@@ -159,4 +186,21 @@ func ObtenerOfertaPorId(c *gin.Context, db *sql.DB) {
 		return
 	}
 	c.JSON(http.StatusOK, oferta)
+}
+
+func ObtenerProveedores(c *gin.Context, db *sql.DB) {
+	proveedores, err := busquedas.ObtenerProveedores(db)
+	if err == sql.ErrNoRows {
+		c.JSON(http.StatusNoContent, gin.H{
+			"error": "No hay proveedores",
+		})
+		return
+	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+		})
+		return
+	}
+	c.JSON(http.StatusOK, proveedores)
 }

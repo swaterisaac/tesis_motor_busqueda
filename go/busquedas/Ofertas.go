@@ -90,3 +90,21 @@ func ObtenerOfertasQuery(db *sql.DB, es *elasticsearch.Client, idUsuario int, qu
 	ofertas, err := obtenerOfertasGeneral(db, es, idUsuario, queryElasticsearch)
 	return ofertas, err
 }
+
+func ObtenerProveedores(db *sql.DB) ([]modelos.Region, error) {
+	query := fmt.Sprintf("SELECT id, nombre FROM proveedores")
+	rows, err := db.Query(query)
+
+	if err != nil {
+		return nil, err
+	}
+	var proveedores []modelos.Region
+	for rows.Next() {
+		var proveedor modelos.Region
+		if err := rows.Scan(&proveedor.ID, &proveedor.Nombre); err != nil {
+			return proveedores, err
+		}
+		proveedores = append(proveedores, proveedor)
+	}
+	return proveedores, nil
+}

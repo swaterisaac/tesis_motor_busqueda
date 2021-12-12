@@ -35,14 +35,13 @@
                     }
                 }
             ],
-            "must_not": [
+            "filter": [
                 {
-                    "match": {
-                        "descriptor": {
-                            "query": "Region y comuna",
-                            "boost": 0.1
-                        }
+                  "range":{
+                    "fecha_final":{
+                      "gt": "2021-12-11"
                     }
+                  }
                 }
             ]
         }
