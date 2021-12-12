@@ -921,7 +921,7 @@ insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 11);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (4, 18);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (6, 24);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 19);
-insert into oferta_consideraciones (id_consideracion, id_oferta) values (5, 19);
+insert into oferta_consideraciones (id_consideracion, id_oferta) values (6, 19);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 2);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (2, 4);
 insert into oferta_consideraciones (id_consideracion, id_oferta) values (3, 5);
