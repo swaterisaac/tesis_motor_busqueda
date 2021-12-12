@@ -9,4 +9,7 @@ type OfertaTuristica struct {
 	Comuna      string `json:"comuna"`
 	Region      string `json:"region"`
 	Proveedor   string `json:"proveedor"`
+	Telefono    string `json:"telefono"`
+	Correo      string `json:"correo"`
+	Pagina      string `json:"pagina"`
 }

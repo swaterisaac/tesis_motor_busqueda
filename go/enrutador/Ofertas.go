@@ -3,6 +3,7 @@ package enrutador
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 	"tesis/busquedas"
@@ -183,6 +184,7 @@ func ObtenerOfertaPorId(c *gin.Context, db *sql.DB) {
 			"msg":   "Error de servidor",
 			"error": err,
 		})
+		log.Println("Error: ", err)
 		return
 	}
 	c.JSON(http.StatusOK, oferta)
