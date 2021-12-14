@@ -2,7 +2,7 @@ package enrutador
 
 import (
 	"database/sql"
-	"fmt"
+	"log"
 	"net/http"
 	"tesis/busquedas"
 	"tesis/modelos"
@@ -57,7 +57,6 @@ func CrearUsuario(c *gin.Context, db *sql.DB) {
 		})
 		return
 	}
-	fmt.Printf("Usuario: %+v\nConsideraciones:\n", usuario)
 
 	if codigo := busquedas.CrearUsuario(db, usuario); codigo == http.StatusInternalServerError {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -68,4 +67,42 @@ func CrearUsuario(c *gin.Context, db *sql.DB) {
 	c.JSON(http.StatusOK, gin.H{
 		"msg": "Se ha creado el usuario",
 	})
+}
+
+func EditarUsuario(c *gin.Context, db *sql.DB) {
+	var usuario modelos.Usuario
+	if err := c.Bind(&usuario); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+			"msg":   "Error con el traspaso de datos",
+		})
+		log.Println("Error: \n", err)
+		return
+	}
+
+	usuarioID, err, _ := busquedas.ObtenerUsuarioPorCorreo(db, usuario.Correo)
+	if err == sql.ErrNoRows {
+		c.JSON(http.StatusNoContent, gin.H{})
+		return
+	}
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+			"msg":   "Error con el servidor",
+		})
+		log.Println("Error: \n", err)
+		return
+	}
+	usuario.ID = usuarioID.ID
+
+	err = busquedas.EditarUsuario(db, usuario)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": err,
+			"msg":   "Error con el servidor",
+		})
+		log.Println("Error: \n", err)
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{})
 }

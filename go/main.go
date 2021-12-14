@@ -84,5 +84,8 @@ func main() {
 	router.POST("/crearHistoriales", func(c *gin.Context) {
 		enrutador.CrearHistoriales(c, db)
 	})
+	router.PUT("/editarUsuario", func(c *gin.Context) {
+		enrutador.EditarUsuario(c, db)
+	})
 	router.Run(":3632")
 }

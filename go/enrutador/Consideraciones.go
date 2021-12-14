@@ -26,6 +26,7 @@ func ObtenerConsideracionesMedicas(c *gin.Context, db *sql.DB) {
 		})
 		return
 	}
+	consideraciones = consideraciones[1:]
 	c.JSON(http.StatusOK, consideraciones)
 }
 

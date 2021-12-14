@@ -179,3 +179,58 @@ func CrearUsuario(db *sql.DB, usuario modelos.Usuario) int {
 	}
 	return http.StatusCreated
 }
+
+func agregarConsideracionUsuario(db *sql.DB, idUsuario int, idConsideracion int) error {
+	query := fmt.Sprintf("INSERT INTO usuario_consideraciones (id_usuario, id_consideracion) "+
+		"VALUES (%d, %d)", idUsuario, idConsideracion)
+	err := db.QueryRow(query).Err()
+	return err
+}
+
+func borrarConsideracionesUsuario(db *sql.DB, idUsuario int) error {
+	query := fmt.Sprintf("DELETE FROM usuario_consideraciones WHERE id_usuario = %d", idUsuario)
+	err := db.QueryRow(query).Err()
+	return err
+}
+
+func EditarUsuario(db *sql.DB, usuario modelos.Usuario) error {
+	camposActualizar := ""
+	primerCampo := false
+	if usuario.FechaNacimiento != "" {
+		camposActualizar += fmt.Sprintf("fecha_nacimiento = '%s'", usuario.FechaNacimiento)
+		primerCampo = true
+	}
+	if usuario.Nombre != "" {
+		if primerCampo {
+			camposActualizar += ", "
+		}
+		camposActualizar += fmt.Sprintf("nombre = '%s'", usuario.Nombre)
+		primerCampo = true
+	}
+	if usuario.IdComuna != 0 {
+		if primerCampo {
+			camposActualizar += ", "
+		}
+		camposActualizar += fmt.Sprintf("id_comuna = %d", usuario.IdComuna)
+	}
+	if camposActualizar != "" {
+		fmt.Println("AQUI: ", camposActualizar)
+		queryActualizar := fmt.Sprintf("UPDATE usuarios SET %s WHERE id = %d", camposActualizar, usuario.ID)
+		err := db.QueryRow(queryActualizar).Err()
+		if err != nil {
+			return err
+		}
+	}
+	if len(usuario.Consideraciones) > 0 {
+		err := borrarConsideracionesUsuario(db, usuario.ID)
+		if err != nil {
+			return err
+		}
+	}
+	for _, idConsideracion := range usuario.Consideraciones {
+		if err := agregarConsideracionUsuario(db, usuario.ID, idConsideracion); err != nil {
+			return err
+		}
+	}
+	return nil
+}
