@@ -518,36 +518,36 @@ insert into historial_busquedas (consulta, frecuencia, id_usuario) values ( 'Fus
 
 -- Ofertas turísticas
 
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Utah', 81603, '2020-06-23', '2021-05-08', 1, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Donald', 17865, '2019-04-26', '2021-01-27', 1, 5);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Packers', 67991, '2019-05-28', '2021-06-17', 1, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Meadow Vale', 5789, '2019-04-18', '2021-08-16', 1, 8);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Lindbergh', 55644, '2021-01-12', '2021-10-09', 1, 8);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Monterey', 95944, '2020-03-14', '2021-08-07', 1, 6);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Tony', 67138, '2019-06-28', '2021-04-25', 1, 6);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Forest Dale', 79426, '2019-09-15', '2021-06-11', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Oriole', 8904, '2019-02-13', '2021-04-25', 1, 1);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Arizona', 28384, '2019-08-26', '2020-10-27', 1, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Evergreen', 82919, '2019-11-19', '2021-05-29', 1, 1);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Warbler', 22965, '2020-06-15', '2020-10-29', 1, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Clove', 59926, '2020-12-17', '2021-04-28', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Dryden', 65888, '2020-12-07', '2021-03-13', 1, 4);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Sundown', 65560, '2019-02-13', '2020-12-15', 1, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Nancy', 85047, '2020-12-21', '2021-01-18', 1, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ridge Oak', 66201, '2020-12-05', '2021-09-20', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Hovde', 38419, '2020-04-04', '2021-02-10', 1, 4);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Havey', 93150, '2020-03-05', '2021-09-15', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Bellgrove', 37357, '2019-05-22', '2021-07-24', 1, 4);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Kropf', 10245, '2020-05-07', '2021-01-28', 1, 1);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Acker', 32937, '2019-09-23', '2021-04-06', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Grayhawk', 9408, '2020-11-11', '2020-12-30', 1, 2);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ( 'Bay', 25542, '2019-12-05', '2020-11-29', 1, 6);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Marquette', 7983, '2020-06-03', '2021-06-23', 1, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Pennsylvania', 11770, '2019-05-08', '2021-10-06', 1, 10);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Jenifer', 97398, '2019-04-18', '2021-08-31', 1, 9);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Carey', 13436, '2019-04-27', '2021-05-26', 1, 3);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Schlimgen', 35435, '2020-08-05', '2021-02-27', 1, 7);
-insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ohio', 53685, '2019-10-08', '2021-07-02', 1, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Utah', '81603', '2020-06-23', '2021-05-08', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Donald', '17865', '2019-04-26', '2021-01-27', 1, 5);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Packers', '67991', '2019-05-28', '2021-06-17', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Meadow Vale', '5789', '2019-04-18', '2021-08-16', 1, 8);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Lindbergh', '55644', '2021-01-12', '2021-10-09', 1, 8);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Monterey', '95944', '2020-03-14', '2021-08-07', 1, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Tony', '67138', '2019-06-28', '2021-04-25', 1, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Forest Dale', '79426', '2019-09-15', '2021-06-11', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Oriole', '8904', '2019-02-13', '2021-04-25', 1, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Arizona', '28384', '2019-08-26', '2020-10-27', 1, 9);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Evergreen', '82919', '2019-11-19', '2021-05-29', 1, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Warbler', '22965', '2020-06-15', '2020-10-29', 1, 9);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Clove', '59926', '2020-12-17', '2021-04-28', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Dryden', '65888', '2020-12-07', '2021-03-13', 1, 4);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Sundown', '65560', '2019-02-13', '2020-12-15', 1, 7);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Nancy', '85047', '2020-12-21', '2021-01-18', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ridge Oak', '66201', '2020-12-05', '2021-09-20', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Hovde', '38419', '2020-04-04', '2021-02-10', 1, 4);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Havey', '93150', '2020-03-05', '2021-09-15', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Bellgrove', '37357', '2019-05-22', '2021-07-24', 1, 4);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Kropf', '10245', '2020-05-07', '2021-01-28', 1, 1);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Acker', '32937', '2019-09-23', '2021-04-06', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Grayhawk', '9408', '2020-11-11', '2020-12-30', 1, 2);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ( 'Bay', '25542', '2019-12-05', '2020-11-29', 1, 6);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Marquette', '7983', '2020-06-03', '2021-06-23', 1, 7);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Pennsylvania', '11770', '2019-05-08', '2021-10-06', 1, 10);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Jenifer', '97398', '2019-04-18', '2021-08-31', 1, 9);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Carey', '13436', '2019-04-27', '2021-05-26', 1, 3);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Schlimgen', '35435', '2020-08-05', '2021-02-27', 1, 7);
+insert into ofertas_turisticas (nombre, precio, fecha_inicio, fecha_final, id_proveedor, id_comuna) values ('Ohio', '53685', '2019-10-08', '2021-07-02', 1, 6);
 
 --Historial regiones
 insert into historial_regiones (frecuencia, id_usuario, id_region) values (99, 9, 6);

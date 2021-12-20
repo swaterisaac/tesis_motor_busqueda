@@ -1,3 +1,20 @@
+DROP TABLE IF EXISTS
+scrapings,
+regiones,
+consideraciones_medicas,
+proveedores,
+comunas,
+usuarios,
+historial_busquedas,
+ofertas_turisticas,
+historial_regiones,
+historial_comunas,
+usuario_consideraciones,
+historial_ofertas,
+oferta_consideraciones,
+CASCADE;
+
+
 CREATE TABLE IF NOT EXISTS scrapings (
   id SERIAL NOT NULL,
   nombreDb varchar(50) NOT NULL,
@@ -65,7 +82,7 @@ CREATE TABLE IF NOT EXISTS historial_busquedas (
 CREATE TABLE IF NOT EXISTS ofertas_turisticas (
   id SERIAL NOT NULL,
   nombre varchar(100) NOT NULL,
-  precio integer NOT NULL,
+  precio varchar(80) NOT NULL,
   fecha_inicio date NOT NULL,
   fecha_final date NOT NULL,
   id_proveedor INT NOT NULL,

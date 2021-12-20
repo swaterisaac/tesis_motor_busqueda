@@ -86,9 +86,8 @@
                     "analyzer": "english",
                     "search_analyzer": "english"
                 },
-
                 "precio": {
-                    "type": "long"
+                    "type": "text"
                 },
 
                 "duracion":{
