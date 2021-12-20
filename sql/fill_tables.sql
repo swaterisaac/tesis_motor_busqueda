@@ -1,22 +1,22 @@
 --Regiones
-INSERT INTO regiones (nombre, abreviatura, capital)
+INSERT INTO regiones (nombre, abreviatura, capital, url_imagen)
 VALUES
-	('Arica y Parinacota','AP','Arica'),
-	('Tarapacá','TA','Iquique'),
-	('Antofagasta','AN','Antofagasta'),
-	('Atacama','AT','Copiapó'),
-	('Coquimbo','CO','La Serena'),
-	('Valparaiso','VA','valparaíso'),
-	('Metropolitana de Santiago','RM','Santiago'),
-	('Libertador General Bernardo OHiggins','OH','Rancagua'),
-	('Maule','MA','Talca'),
-	('Ñuble','NB','Chillán'),
-	('Biobío','BI','Concepción'),
-	('La Araucanía','IAR','Temuco'),
-	('Los Ríos','LR','Valdivia'),
-	('Los Lagos','LL','Puerto Montt'),
-	('Aysén del General Carlos Ibáñez del Campo','AI','Coyhaique'),
-	('Magallanes y de la Antártica Chilena','MG','Punta Arenas');
+	('Arica y Parinacota','AP','Arica', 'https://chileanendemics.rbge.org.uk/images/uploads/_hero/PN-Chungar%C3%A1-Arica-Parinacota-PC-2007.jpg'),
+	('Tarapacá','TA','Iquique', 'https://www.cambioclimaticochile.cl/wp-content/uploads/2018/06/Tarapaca.jpg'),
+	('Antofagasta','AN','Antofagasta', 'https://lh3.googleusercontent.com/proxy/CwFUwZv4eeZoafKuPK8mDPcmqmuci9gPYKu8Flyc0J-9PDdghSzeAMFi3xbOi-0BUrujjiS5MwEfWCqFhx1rwwI_mPP9DXuDosmK7bs7hhqD10G6kQ8MCpOLItE4r8AHnNndhAeHRoVL_hVSUA_dinWicOAsi9RlErUwv7r5vJAfBdzHaSdk6QKM9ktK0htapSDWWmq10SATsuyTlxY'),
+	('Atacama','AT','Copiapó', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqdmr62oRXccLXbTKUNoBJU2njhZ0kMmuS6g&usqp=CAU'),
+	('Coquimbo','CO','La Serena', 'https://upload.wikimedia.org/wikipedia/commons/6/60/Cruz_del_Tercer_Milenio.jpg'),
+	('Valparaiso','VA','valparaíso', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP9Sdtdqw119QDJzRlZmaP_jAYf0TX2kFaqg&usqp=CAU'),
+	('Metropolitana de Santiago','RM','Santiago', 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.static-af.com%2Fimages%2Fmeta%2FIDname%2FCITY-SCL-1%3Faspect_ratio%3D2%3A1%26max_width%3D1920&imgrefurl=https%3A%2F%2Fwww.airfrance.cl%2Fguia-viajes%2Fsantiago&tbnid=9wfvcXDIviTXmM&vet=12ahUKEwjZlYiXrPP0AhVeMrkGHSj0D-cQMygBegUIARDMAQ..i&docid=kfOsuyHksNGtfM&w=1920&h=960&q=Santiago&client=ubuntu&ved=2ahUKEwjZlYiXrPP0AhVeMrkGHSj0D-cQMygBegUIARDMAQ'),
+	('Libertador General Bernardo OHiggins','OH','Rancagua', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgMdfKXM4NQbjl-JUAd6xb0Ij4MJ2l6iRjeg&usqp=CAU'),
+	('Maule','MA','Talca', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrlcmAYeF8mc3emSFtt_CvVMexqF6c3utRkg&usqp=CAU'),
+	('Ñuble','NB','Chillán', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtqkcBK8bGxT_iqaU4BH6OCNqZoJtPVt3P_w&usqp=CAU'),
+	('Biobío','BI','Concepción', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMnw5TF1jUBRT7Ff4aKTW6rmf2Phl8inmbMg&usqp=CAU'),
+	('La Araucanía','IAR','Temuco', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxc-4rkmL1KffhmEUPPJQ2hT3BStH2ivYQWw&usqp=CAU'),
+	('Los Ríos','LR','Valdivia', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLYMci4pbXVejTkFTz05_6czbEAItSCbcEkA&usqp=CAU'),
+	('Los Lagos','LL','Puerto Montt', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRagw6mh2F-ywpS6ZR8zZXLoJBkMBkYvVdK2g&usqp=CAU'),
+	('Aysén del General Carlos Ibáñez del Campo','AI','Coyhaique', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNGZyuyG55m7gIzp-o5n3CYiBnDeetLhla2w&usqp=CAU'),
+	('Magallanes y de la Antártica Chilena','MG','Punta Arenas', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKyLY7Zp5qtEJb5XUT2PCk84-q1Xg3gSBLIA&usqp=CAU');
 
 
 --Consideraciones Médicas

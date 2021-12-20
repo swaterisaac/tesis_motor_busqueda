@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS regiones (
   nombre varchar(64) NOT NULL,
   abreviatura varchar(5) NOT NULL,
   capital varchar(64) NOT NULL,
+  url_imagen text,
   PRIMARY KEY (id)
 );
 
@@ -83,8 +84,10 @@ CREATE TABLE IF NOT EXISTS ofertas_turisticas (
   id SERIAL NOT NULL,
   nombre varchar(100) NOT NULL,
   precio varchar(80) NOT NULL,
+  ubicacion text,
+  url_imagen text,
   fecha_inicio date NOT NULL,
-  fecha_final date NOT NULL,
+  fecha_final date,
   id_proveedor INT NOT NULL,
   id_comuna INT NOT NULL,
   PRIMARY KEY (id),
