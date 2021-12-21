@@ -22,18 +22,22 @@ func ObtenerOfertasUsuario(c *gin.Context, db *sql.DB, es *elasticsearch.Client)
 	paginaNum, errPagina := strconv.Atoi(pagina)
 
 	if errTamanio != nil || errPagina != nil {
+		log.Println("Error tamanio: ", errTamanio)
+		log.Println("Error pagina: ", errPagina)
 		c.JSON(http.StatusBadRequest, gin.H{
 			"msg": "Tamaño y pagina deben ser valores numéricos",
 		})
 		return
 	}
 	if tamanioNum <= 0 || paginaNum <= 0 || tamanioNum > 1000 || paginaNum > 1000 {
+		log.Println("Error: Tamaño y pagina deben ser positivos distintos de 0 y menores a 1000")
 		c.JSON(http.StatusBadRequest, gin.H{
 			"msg": "Tamaño y pagina deben ser positivos distintos de 0 y menores a 1000",
 		})
 		return
 	}
 	if correo == "" {
+		log.Println("Error: No se ha ingresado correo")
 		c.JSON(http.StatusBadRequest, gin.H{
 			"msg": "No se ha ingresado correo",
 		})
@@ -42,12 +46,14 @@ func ObtenerOfertasUsuario(c *gin.Context, db *sql.DB, es *elasticsearch.Client)
 	id, err, codigo := busquedas.ObtenerIdUsarioPorCorreo(db, correo)
 
 	if codigo == http.StatusNotFound {
+		log.Println("Error: ", err)
 		c.JSON(http.StatusNotFound, gin.H{
 			"msg": "El correo no está registrado",
 		})
 		return
 	}
 	if err != nil {
+		log.Println("Error: ", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"msg":   "Error de servidor",
 			"error": err,
@@ -56,6 +62,7 @@ func ObtenerOfertasUsuario(c *gin.Context, db *sql.DB, es *elasticsearch.Client)
 	}
 	ofertas, err := busquedas.ObtenerOfertasRecomendacion(db, es, id, tamanioNum, paginaNum)
 	if err != nil {
+		log.Println("Error: ", err)
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err,
 		})
