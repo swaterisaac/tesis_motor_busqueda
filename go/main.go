@@ -45,16 +45,14 @@ func main() {
 		panic(err)
 	}
 
-	router := gin.Default()
+	router := gin.New()
+	router.Use(gin.Logger())
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
 		AllowMethods:     []string{"*"},
 		AllowHeaders:     []string{"*"},
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-		AllowOriginFunc: func(origin string) bool {
-			return origin == "https://github.com"
-		},
 	}))
 	router.GET("/ofertas", func(c *gin.Context) {
 		enrutador.ObtenerOfertasUsuario(c, db, es)
