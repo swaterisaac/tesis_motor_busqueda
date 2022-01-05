@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"tesis/conexion"
 	"tesis/enrutador"
 
@@ -11,6 +12,13 @@ import (
 )
 
 func main() {
+
+	//Puerto de heroku
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3632"
+	}
+
 	//Conexión base de datos aplicación
 	db, err := conexion.ConexionDb(conexion.ObtenerEntornoConexion())
 	if err != nil {
@@ -87,5 +95,5 @@ func main() {
 	router.PUT("/editarUsuario", func(c *gin.Context) {
 		enrutador.EditarUsuario(c, db)
 	})
-	router.Run(":3632")
+	router.Run(":" + port)
 }
