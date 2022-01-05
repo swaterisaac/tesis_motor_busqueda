@@ -9,6 +9,11 @@ import (
 
 //Inicialización para cargar archivo .env (Variables de entorno)
 func init() {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println("Recovered in f", r)
+		}
+	}()
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)

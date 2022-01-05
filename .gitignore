@@ -2,4 +2,4 @@
 /elasticsearch-lab
 /postgres_data
 /postgres_data_scrapping
-go/.env
+.env
