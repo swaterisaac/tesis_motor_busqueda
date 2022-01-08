@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS historial_busquedas (
 
 CREATE TABLE IF NOT EXISTS ofertas_turisticas (
   id SERIAL NOT NULL,
-  nombre varchar(100) NOT NULL,
-  precio varchar(80) NOT NULL,
+  nombre varchar(200) NOT NULL,
+  precio varchar(300) NOT NULL,
   ubicacion text,
   url_imagen text,
   fecha_inicio date NOT NULL,
