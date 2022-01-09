@@ -1,4 +1,4 @@
-{
+{    
     "index_patterns": "testlogstash*",
     "settings": {
         "index.refresh_interval": "5s",
@@ -36,7 +36,7 @@
     },
     "mappings": {
         "testlogstash": {
-            "dynamic": false,
+            "dynamic": true,
             "properties": {
                 "descriptor": {
                     "type": "text",

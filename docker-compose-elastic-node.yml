@@ -3,7 +3,7 @@ version: '3.5'
 services:
   elasticsearch-lab-1:
     container_name: elasticsearch-lab-1
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
 
     environment:
       - "cluster.name=elasticsearch-lab-cluster"  #Sets cluster name
@@ -26,23 +26,15 @@ services:
       - "9200:9200"
       - "9300:9300"
 
-  carebro:
-    container_name: cerebro-lab
-    image: lmenezes/cerebro:0.8.1
-    ports:
-      - "9000:9000"
-    external_links:
-      - elasticsearch-lab-1:elasticsearch1
-
   kibana:
     container_name: kibana-lab
-    image: docker.elastic.co/kibana/kibana:6.5.4
+    image: docker.elastic.co/kibana/kibana:7.16.2
     ports:
       - "5601:5601"
     external_links:
       - elasticsearch-lab-1:elasticsearch1
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch1:9200
+      ELASTICSEARCH_HOSTS: '["http://elasticsearch1:9200"]'
 
   postgres:
     image: postgres:10.5
