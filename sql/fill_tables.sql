@@ -3,11 +3,11 @@ INSERT INTO regiones (nombre, abreviatura, capital, url_imagen)
 VALUES
 	('Arica y Parinacota','AP','Arica', 'https://chileanendemics.rbge.org.uk/images/uploads/_hero/PN-Chungar%C3%A1-Arica-Parinacota-PC-2007.jpg'),
 	('Tarapacá','TA','Iquique', 'https://www.cambioclimaticochile.cl/wp-content/uploads/2018/06/Tarapaca.jpg'),
-	('Antofagasta','AN','Antofagasta', 'https://lh3.googleusercontent.com/proxy/CwFUwZv4eeZoafKuPK8mDPcmqmuci9gPYKu8Flyc0J-9PDdghSzeAMFi3xbOi-0BUrujjiS5MwEfWCqFhx1rwwI_mPP9DXuDosmK7bs7hhqD10G6kQ8MCpOLItE4r8AHnNndhAeHRoVL_hVSUA_dinWicOAsi9RlErUwv7r5vJAfBdzHaSdk6QKM9ktK0htapSDWWmq10SATsuyTlxY'),
+	('Antofagasta','AN','Antofagasta', 'https://i3.visitchile.com/img/GalleryContent/231/Antofagasta1.jpg'),
 	('Atacama','AT','Copiapó', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqdmr62oRXccLXbTKUNoBJU2njhZ0kMmuS6g&usqp=CAU'),
 	('Coquimbo','CO','La Serena', 'https://upload.wikimedia.org/wikipedia/commons/6/60/Cruz_del_Tercer_Milenio.jpg'),
 	('Valparaiso','VA','valparaíso', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP9Sdtdqw119QDJzRlZmaP_jAYf0TX2kFaqg&usqp=CAU'),
-	('Metropolitana de Santiago','RM','Santiago', 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.static-af.com%2Fimages%2Fmeta%2FIDname%2FCITY-SCL-1%3Faspect_ratio%3D2%3A1%26max_width%3D1920&imgrefurl=https%3A%2F%2Fwww.airfrance.cl%2Fguia-viajes%2Fsantiago&tbnid=9wfvcXDIviTXmM&vet=12ahUKEwjZlYiXrPP0AhVeMrkGHSj0D-cQMygBegUIARDMAQ..i&docid=kfOsuyHksNGtfM&w=1920&h=960&q=Santiago&client=ubuntu&ved=2ahUKEwjZlYiXrPP0AhVeMrkGHSj0D-cQMygBegUIARDMAQ'),
+	('Metropolitana de Santiago','RM','Santiago', 'https://images.pexels.com/photos/2017747/pexels-photo-2017747.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
 	('Libertador General Bernardo OHiggins','OH','Rancagua', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgMdfKXM4NQbjl-JUAd6xb0Ij4MJ2l6iRjeg&usqp=CAU'),
 	('Maule','MA','Talca', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrlcmAYeF8mc3emSFtt_CvVMexqF6c3utRkg&usqp=CAU'),
 	('Ñuble','NB','Chillán', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtqkcBK8bGxT_iqaU4BH6OCNqZoJtPVt3P_w&usqp=CAU'),
