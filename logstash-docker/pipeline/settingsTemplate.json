@@ -1,9 +1,8 @@
-{    
-    "index_patterns": "testlogstash*",
+{
+    "index_patterns": [
+        "testlogstash*"
+    ],
     "settings": {
-        "index.refresh_interval": "5s",
-        "number_of_shards": 2,
-        "number_of_replicas": 0,
         "analysis": {
             "filter": {
                 "spanish_stop": {
@@ -22,7 +21,8 @@
                 }
             },
             "analyzer": {
-                "rebuilt_spanish": {
+                "default": {
+                    "type": "custom",
                     "tokenizer": "standard",
                     "filter": [
                         "lowercase",
@@ -35,29 +35,26 @@
         }
     },
     "mappings": {
-        "testlogstash": {
-            "dynamic": true,
-            "properties": {
-                "descriptor": {
-                    "type": "text",
-                    "analyzer": "rebuilt_spanish",
-                    "search_analyzer": "rebuilt_spanish"
-                },
-                "precio": {
-                    "type": "text"
-                },
-                "fecha_inicio": {
-                    "type": "date"
-                },
-                "fecha_final": {
-                    "type": "date"
-                },
-                "idEnDB": {
-                    "type": "long"
-                },
-                "consideraciones": {
-                    "type": "keyword"
-                }
+        "properties": {
+            "descriptor": {
+                "type": "text",
+                "analyzer": "default",
+                "search_analyzer": "default"
+            },
+            "precio": {
+                "type": "text"
+            },
+            "fecha_inicio": {
+                "type": "date"
+            },
+            "fecha_final": {
+                "type": "date"
+            },
+            "idEnDB": {
+                "type": "long"
+            },
+            "consideraciones": {
+                "type": "keyword"
             }
         }
     }
